@@ -17,9 +17,9 @@
 					<li class="nav-item"><a class="nav-link" href="#">Vuelos</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Reservar</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Check-in</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Contactos</a></li>
 				</ul>
-				<a href="?pid=<?php echo base64_encode('autenticar.php'); ?>" class="btn btn-outline-primary ms-3">
+				<a href="?pid=<?php echo base64_encode('autenticacion/autenticar.php'); ?>" class="btn btn-outline-primary ms-3">
 					<i class="fa-solid fa-user me-1"></i> Iniciar Sesión
 				</a>
 			</div>

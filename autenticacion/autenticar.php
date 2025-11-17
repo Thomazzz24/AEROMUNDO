@@ -64,7 +64,8 @@ if (isset($_POST["autenticar"])) {
                         </div>
                     <?php } ?>
 
-                    <form method="post" action="?pid=<?php echo base64_encode("autenticar.php") ?>">
+                    <form method="post" action="?pid=<?php echo base64_encode("autenticacion/autenticar.php") ?>"
+>
                         
                         <div class="mb-3">
                             <label class="form-label">Correo electrónico</label>

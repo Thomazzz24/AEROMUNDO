@@ -69,7 +69,7 @@ if(isset($_POST["registrar"])){
                             <div class="text-center">
                                 <p class="text-muted">
                                     ¿Ya tienes cuenta?
-                                    <a href="?pid=<?php echo base64_encode('autenticar.php'); ?>" class="fw-bold">
+                                    <a href="?pid=<?php echo base64_encode('autenticacion/autenticar.php'); ?>" class="fw-bold">
                                         Inicia sesión aquí
                                     </a>
                                 </p>
