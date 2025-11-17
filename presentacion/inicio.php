@@ -66,7 +66,7 @@
 		<div class="row row-cols-1 row-cols-md-3 g-4">
 			<div class="col">
 				<div class="card h-100 shadow-sm">
-					<img src="img/paris.jpg" class="card-img-top" alt="París">
+					<img src="img/paris.jpeg" class="card-img-top" alt="París">
 					<div class="card-body">
 						<h5 class="card-title">París</h5>
 						<p class="card-text">Vuela a la ciudad del amor y disfruta su historia, arte y gastronomía.</p>
@@ -80,7 +80,7 @@
 
 			<div class="col">
 				<div class="card h-100 shadow-sm">
-					<img src="img/cartagena.jpg" class="card-img-top" alt="Cartagena">
+					<img src="img/cartagena.jpeg" class="card-img-top" alt="Cartagena">
 					<div class="card-body">
 						<h5 class="card-title">Cartagena</h5>
 						<p class="card-text">Playas caribeñas, historia y cultura colonial en un solo destino.</p>
@@ -94,7 +94,7 @@
 
 			<div class="col">
 				<div class="card h-100 shadow-sm">
-					<img src="img/madrid.jpg" class="card-img-top" alt="Madrid">
+					<img src="img/madrid.webp" class="card-img-top" alt="Madrid">
 					<div class="card-body">
 						<h5 class="card-title">Madrid</h5>
 						<p class="card-text">Descubre la energía y cultura de una de las capitales más vibrantes de Europa.</p>
