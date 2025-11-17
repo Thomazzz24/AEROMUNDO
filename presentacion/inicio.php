@@ -12,7 +12,7 @@
 			<div class="collapse navbar-collapse" id="menu">
 				<ul class="navbar-nav ms-auto">
 					<li class="nav-item">
-						<a class="nav-link active" href="?pid=<?php echo base64_encode('presentacion/sesionAdmin.php'); ?>">Inicio</a>
+						<a class="nav-link active" href="?pid=<?php echo base64_encode('administrador/sesionAdmin.php'); ?>">Inicio</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="#">Vuelos</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Reservar</a></li>

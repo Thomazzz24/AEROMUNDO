@@ -1,9 +1,11 @@
 <?php
 session_start();
+
 require_once("logica/Persona.php");
 require_once("logica/Admin.php");
 require_once("logica/Piloto.php");
 require_once("logica/Pasajero.php");
+require_once("logica/Vuelo.php");
 
 
 if (isset($_GET["salir"])) {

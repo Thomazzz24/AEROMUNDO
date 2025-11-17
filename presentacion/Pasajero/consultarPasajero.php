@@ -10,7 +10,7 @@ $admin = new Admin($id);
 $admin->consultarPorId();
 ?>
 <body>
-<?php include 'presentacion/menuAdministrador.php'; ?>
+<?php include 'presentacion/administrador/menuAdministrador.php'; ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <div class="container">
     <div class="row mt-5">

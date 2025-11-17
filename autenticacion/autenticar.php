@@ -14,7 +14,7 @@ if (isset($_POST["autenticar"])) {
     if ($admin->autenticar()) {
         $_SESSION["id"] = $admin->getId();
         $_SESSION["rol"] = "admin";
-        header("Location: ?pid=" . base64_encode("presentacion/sesionAdmin.php"));
+header("Location: ?pid=" . base64_encode("presentacion/administrador/sesionAdmin.php"));
         exit();
     }
 
@@ -22,7 +22,7 @@ if (isset($_POST["autenticar"])) {
     if ($piloto->autenticar()) {
         $_SESSION["id"] = $piloto->getId();
         $_SESSION["rol"] = "piloto";
-        header("Location: ?pid=" . base64_encode("presentacion/sesionPiloto.php"));
+header("Location: ?pid=" . base64_encode("presentacion/piloto/sesionPiloto.php"));
         exit();
     }
 
@@ -30,7 +30,7 @@ if (isset($_POST["autenticar"])) {
     if ($pasajero->autenticar()) {
         $_SESSION["id"] = $pasajero->getId();
         $_SESSION["rol"] = "pasajero";
-        header("Location: ?pid=" . base64_encode("presentacion/sesionPasajero.php"));
+header("Location: ?pid=" . base64_encode("presentacion/pasajero/sesionPasajero.php"));
         exit();
     }
 
