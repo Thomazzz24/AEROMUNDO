@@ -1,122 +1,134 @@
-<body>
-	<!-- NAVBAR -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow">
-		<div class="container">
-			<a class="navbar-brand d-flex align-items-center" href="#">
-				<img src="img/logo.jpg" alt="Logo" width="40" height="40" class="me-2">
-				AeroMundo Viajes
-			</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="menu">
-				<ul class="navbar-nav ms-auto">
-					<li class="nav-item">
-						<a class="nav-link active" href="?pid=<?php echo base64_encode('administrador/sesionAdmin.php'); ?>">Inicio</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="#">Vuelos</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Reservar</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Check-in</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Contactos</a></li>
-				</ul>
-				<a href="?pid=<?php echo base64_encode('autenticacion/autenticar.php'); ?>" class="btn btn-outline-primary ms-3">
-					<i class="fa-solid fa-user me-1"></i> Iniciar Sesión
-				</a>
-			</div>
-		</div>
-	</nav>
+<body class="bg-light">
 
-	<!-- CARRUSEL -->
-	<div id="carousel" class="carousel slide mt-5 pt-4" data-bs-ride="carousel">
-		<div class="carousel-indicators">
-			<button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active"></button>
-			<button type="button" data-bs-target="#carousel" data-bs-slide-to="1"></button>
-		</div>
+    <!-- NAVBAR ROJA -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center fw-bold" href="#">
+                <img src="img/logo.jpg" alt="Logo" width="40" height="40" class="me-2 rounded-circle border border-light">
+                AeroMundo Viajes
+            </a>
 
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<img src="img/carrusel1.jpg" class="d-block w-100 rounded" alt="Viajes por el mundo"
-					style="height: 400px; object-fit: cover;">
-				<div class="carousel-caption bg-dark bg-opacity-50 rounded p-3">
-					<h3>Descubre el mundo con nosotros</h3>
-					<p>Encuentra vuelos económicos y destinos soñados.</p>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<img src="img/carrusel2.jpg" class="d-block w-100 rounded" alt="Aventura"
-					style="height: 400px; object-fit: cover;">
-				<div class="carousel-caption bg-dark bg-opacity-50 rounded p-3">
-					<h3>Explora sin límites</h3>
-					<p>Ofertas únicas a los mejores destinos turísticos.</p>
-				</div>
-			</div>
-		</div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-		<button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-			<span class="carousel-control-prev-icon"></span>
-		</button>
-		<button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-			<span class="carousel-control-next-icon"></span>
-		</button>
-	</div>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active text-white fw-semibold" 
+                        href="?pid=<?php echo base64_encode('administrador/sesionAdmin.php'); ?>">Inicio</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Vuelos</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Reservar</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Check-in</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Contactos</a></li>
+                </ul>
 
-	<!-- DESTINOS POPULARES -->
-	<div class="container my-5">
-		<h2 class="text-center mb-4">Destinos Populares</h2>
-		<div class="row row-cols-1 row-cols-md-3 g-4">
-			<div class="col">
-				<div class="card h-100 shadow-sm">
-					<img src="img/paris.jpeg" class="card-img-top" alt="París">
-					<div class="card-body">
-						<h5 class="card-title">París</h5>
-						<p class="card-text">Vuela a la ciudad del amor y disfruta su historia, arte y gastronomía.</p>
-						<p class="fw-bold">Desde $2.400.000 COP</p>
-						<button class="btn btn-primary w-100">
-							<i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
-						</button>
-					</div>
-				</div>
-			</div>
+                <a href="?pid=<?php echo base64_encode('autenticacion/autenticar.php'); ?>" 
+                   class="btn btn-outline-light ms-3">
+                    <i class="fa-solid fa-user me-1"></i> Iniciar Sesión
+                </a>
+            </div>
+        </div>
+    </nav>
 
-			<div class="col">
-				<div class="card h-100 shadow-sm">
-					<img src="img/cartagena.jpeg" class="card-img-top" alt="Cartagena">
-					<div class="card-body">
-						<h5 class="card-title">Cartagena</h5>
-						<p class="card-text">Playas caribeñas, historia y cultura colonial en un solo destino.</p>
-						<p class="fw-bold">Desde $420.000 COP</p>
-						<button class="btn btn-primary w-100">
-							<i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
-						</button>
-					</div>
-				</div>
-			</div>
+    <!-- CARRUSEL -->
+    <div id="carousel" class="carousel slide mt-5 pt-4" data-bs-ride="carousel">
+        
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#carousel" data-bs-slide-to="1"></button>
+        </div>
 
-			<div class="col">
-				<div class="card h-100 shadow-sm">
-					<img src="img/madrid.webp" class="card-img-top" alt="Madrid">
-					<div class="card-body">
-						<h5 class="card-title">Madrid</h5>
-						<p class="card-text">Descubre la energía y cultura de una de las capitales más vibrantes de Europa.</p>
-						<p class="fw-bold">Desde $3.000.000 COP</p>
-						<button class="btn btn-primary w-100">
-							<i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+        <div class="carousel-inner rounded shadow">
+            <div class="carousel-item active">
+                <img src="img/carrusel1.jpg" class="d-block w-100" alt="Viajes por el mundo"
+                    style="height: 420px; object-fit: cover;">
+                <div class="carousel-caption bg-danger bg-opacity-75 rounded p-3 shadow">
+                    <h3 class="fw-bold">Descubre el mundo con nosotros</h3>
+                    <p>Encuentra vuelos económicos y destinos soñados.</p>
+                </div>
+            </div>
 
+            <div class="carousel-item">
+                <img src="img/carrusel2.jpg" class="d-block w-100" alt="Aventura"
+                    style="height: 420px; object-fit: cover;">
+                <div class="carousel-caption bg-danger bg-opacity-75 rounded p-3 shadow">
+                    <h3 class="fw-bold">Explora sin límites</h3>
+                    <p>Ofertas únicas a los mejores destinos turísticos.</p>
+                </div>
+            </div>
+        </div>
 
-	<!-- FOOTER -->
-	<footer class="bg-light text-center text-muted py-4 mt-5 border-top">
-		<div class="container">
-			<p class="mb-1">© 2025 AeroMundo Viajes - Todos los derechos reservados</p>
-			<p>
-				<i class="fa-solid fa-phone me-1"></i> +57 310 456 7890 |
-				<i class="fa-solid fa-envelope ms-2 me-1"></i> contacto@aeromundo.com
-			</p>
-		</div>
-	</footer>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+    <!-- DESTINOS POPULARES -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4 text-danger fw-bold">Destinos Populares</h2>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+
+            <!-- DESTINO CARD -->
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="img/paris.jpeg" class="card-img-top" alt="París">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-danger">París</h5>
+                        <p class="card-text">Vuela a la ciudad del amor y disfruta su historia, arte y gastronomía.</p>
+                        <p class="fw-bold text-dark">Desde $2.400.000 COP</p>
+                        <button class="btn btn-danger w-100">
+                            <i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="img/cartagena.jpeg" class="card-img-top" alt="Cartagena">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-danger">Cartagena</h5>
+                        <p class="card-text">Playas caribeñas, historia y cultura colonial en un solo destino.</p>
+                        <p class="fw-bold text-dark">Desde $420.000 COP</p>
+                        <button class="btn btn-danger w-100">
+                            <i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="img/madrid.webp" class="card-img-top" alt="Madrid">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-danger">Madrid</h5>
+                        <p class="card-text">Descubre la energía y cultura de una de las capitales más vibrantes de Europa.</p>
+                        <p class="fw-bold text-dark">Desde $3.000.000 COP</p>
+                        <button class="btn btn-danger w-100">
+                            <i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FOOTER ROJO -->
+    <footer class="bg-danger text-white text-center py-4 mt-5 shadow-sm">
+        <div class="container">
+            <p class="mb-1 fw-semibold">© 2025 AeroMundo Viajes - Todos los derechos reservados</p>
+            <p class="fw-light">
+                <i class="fa-solid fa-phone me-1"></i> +57 310 456 7890 |
+                <i class="fa-solid fa-envelope ms-2 me-1"></i> contacto@aeromundo.com
+            </p>
+        </div>
+    </footer>
+
 </body>
