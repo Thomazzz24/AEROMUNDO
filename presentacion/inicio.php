@@ -14,8 +14,8 @@
 					<li class="nav-item">
 						<a class="nav-link active" href="?pid=<?php echo base64_encode('administrador/sesionAdmin.php'); ?>">Inicio</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="#">Vuelos</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Reservar</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Vueloss</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Reservarrrr</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Check-in</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Contactos</a></li>
 				</ul>
