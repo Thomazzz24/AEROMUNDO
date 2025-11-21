@@ -52,8 +52,8 @@
                     </a>
                     <ul class="dropdown-menu shadow-sm">
                         <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/Pasajero/consultarPasajero.php'); ?>">
-                               Consultar Clientes/Pasajeros</a>
+                                href="?pid=<?php echo base64_encode('presentacion/Pasajero/consultarPasajero.php'); ?>">
+                                Consultar Clientes/Pasajeros</a>
                         </li>
                     </ul>
                 </li>
@@ -65,7 +65,7 @@
                     </a>
                     <ul class="dropdown-menu shadow-sm">
                         <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/Avion/crearAviones.php'); ?>">
+                               href="?pid=<?php echo base64_encode('presentacion/Avion/crearAvion.php'); ?>">
                                Registrar Aviones</a>
                         </li>
                         <li><a class="dropdown-item"
@@ -86,15 +86,15 @@
                     </a>
                     <ul class="dropdown-menu shadow-sm">
                         <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/producto/crearProducto.php'); ?>">
-                               Registrar Rutas</a>
+                               href="?pid=<?php echo base64_encode('presentacion/Ruta/crearRuta.php'); ?>">
+                               Crear Ruta</a>
                         </li>
                         <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/producto/consultarProducto.php'); ?>">
+                               href="?pid=<?php echo base64_encode('presentacion/Ruta/consultarRutas.php'); ?>">
                                Consultar Rutas</a>
                         </li>
                         <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/producto/buscarProducto.php'); ?>">
+                               href="?pid=<?php echo base64_encode('presentacion/Ruta/buscarRuta.php'); ?>">
                                Buscar Rutas</a>
                         </li>
                     </ul>

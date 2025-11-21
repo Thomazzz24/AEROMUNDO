@@ -6,6 +6,8 @@ require_once("logica/Admin.php");
 require_once("logica/Piloto.php");
 require_once("logica/Pasajero.php");
 require_once("logica/Vuelo.php");
+require_once("logica/Avion.php");
+require_once("logica/Ruta.php");
 
 
 if (isset($_GET["salir"])) {
