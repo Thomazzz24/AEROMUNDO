@@ -56,7 +56,7 @@ include 'presentacion/administrador/menuAdministrador.php';
                 <div class="card-body">
                     <i class="fa-solid fa-route fa-2x mb-2 text-danger"></i>
                     <h5 class="card-title">Rutas</h5>
-                    <a href="?pid=<?php echo base64_encode('presentacion/producto/consultarProducto.php'); ?>" 
+                    <a href="?pid=<?php echo base64_encode('presentacion/Ruta/consultarRutas.php'); ?>" 
                        class="btn btn-danger btn-sm mt-2">Ver más</a>
                 </div>
             </div>
@@ -66,7 +66,7 @@ include 'presentacion/administrador/menuAdministrador.php';
 </div>
 
 <?php
-include 'presentacion/vuelos/vuelos.php';
+include 'presentacion/vuelos/consultarVuelos.php';
 ?>
 
 

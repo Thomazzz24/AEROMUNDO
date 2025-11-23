@@ -82,5 +82,7 @@ class PilotoDAO{
     }
     public function eliminarUsuario(){
         return "DELETE FROM usuario WHERE id_usuario = " . $this->id;
-    }   
+    }  
+
+    
 }

@@ -107,15 +107,15 @@
                     </a>
                     <ul class="dropdown-menu shadow-sm">
                         <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/producto/crearProducto.php'); ?>">
+                               href="?pid=<?php echo base64_encode('presentacion/Vuelos/crearVuelos.php'); ?>">
                                Registrar Vuelos</a>
                         </li>
                         <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/producto/consultarProducto.php'); ?>">
+                               href="?pid=<?php echo base64_encode('presentacion/Vuelos/consultarVuelos.php'); ?>">
                                Consultar Vuelos</a>
                         </li>
                         <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/producto/buscarProducto.php'); ?>">
+                               href="?pid=<?php echo base64_encode('presentacion/Vuelos/buscarProducto.php'); ?>">
                                Buscar Vuelos</a>
                         </li>
                     </ul>

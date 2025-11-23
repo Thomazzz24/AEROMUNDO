@@ -1,6 +1,6 @@
 <?php
-require_once("persistencia/Conexion.php");
-require_once("persistencia/AvionDAO.php");
+require_once(__DIR__ . "/../persistencia/Conexion.php");
+require_once(__DIR__ . "/../persistencia/AvionDAO.php");
 
 class Avion {
     private $id;
@@ -94,4 +94,6 @@ class Avion {
         $conexion->ejecutar($dao->eliminar());
         $conexion->cerrar();
     }
+
+    
 }

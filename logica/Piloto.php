@@ -1,6 +1,6 @@
 <?php
-require_once("persistencia/Conexion.php");
-require_once("persistencia/PilotoDAO.php");
+require_once(__DIR__ . "/../persistencia/Conexion.php");
+require_once(__DIR__ . "/../persistencia/PilotoDAO.php");
 class Piloto extends Persona{
     private $foto_perfil;
     public function __construct($id=0, $nombre="", $apellido="", $correo="", $clave="", $rol=0, $estado=0, $fecharegistro="", $foto_perfil=""){
