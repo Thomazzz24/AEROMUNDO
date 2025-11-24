@@ -4,7 +4,7 @@ require_once("logica/Persona.php");
 require_once("logica/Admin.php");
 require_once("logica/Piloto.php");
 require_once("logica/Pasajero.php");
-$error = false;
+$error = 0;
 
 if (isset($_POST["autenticar"])) {
     $correo = $_POST["correo"];
@@ -14,27 +14,31 @@ if (isset($_POST["autenticar"])) {
     if ($admin->autenticar()) {
         $_SESSION["id"] = $admin->getId();
         $_SESSION["rol"] = "admin";
-header("Location: ?pid=" . base64_encode("presentacion/administrador/sesionAdmin.php"));
+        header("Location: ?pid=" . base64_encode("presentacion/administrador/sesionAdmin.php"));
         exit();
+    }else{
+        $pasajero = new Pasajero(0, "", "", $correo, $clave);
+            if ($pasajero->autenticar()) {
+                if($pasajero-> getEstado()){
+                    $_SESSION["id"] = $pasajero->getId();
+                    $_SESSION["rol"] = "pasajero";
+                    header("Location: ?pid=" . base64_encode("presentacion/pasajero/sesionPasajero.php"));
+                    exit();
+                }else{
+                    $error = 2;         
+                }
+            }else{
+                $error = 1;
+            }    
     }
 
     $piloto = new Piloto(0, "", "", $correo, $clave);
     if ($piloto->autenticar()) {
         $_SESSION["id"] = $piloto->getId();
         $_SESSION["rol"] = "piloto";
-header("Location: ?pid=" . base64_encode("presentacion/piloto/sesionPiloto.php"));
+        header("Location: ?pid=" . base64_encode("presentacion/piloto/sesionPiloto.php"));
         exit();
     }
-
-    $pasajero = new Pasajero(0, "", "", $correo, $clave);
-    if ($pasajero->autenticar()) {
-        $_SESSION["id"] = $pasajero->getId();
-        $_SESSION["rol"] = "pasajero";
-header("Location: ?pid=" . base64_encode("presentacion/pasajero/sesionPasajero.php"));
-        exit();
-    }
-
-    $error = true;
 }
 ?>
 <!DOCTYPE html>
@@ -106,7 +110,17 @@ header("Location: ?pid=" . base64_encode("presentacion/pasajero/sesionPasajero.p
                         </div>
 
                     </form>
-
+                    <?php
+                    if($error == 1){
+                        echo "<div class='alert alert-danger text-center fw-semibold'>
+                            Correo o clave incorrectos.
+                        </div>";
+                    }else if($error == 2){
+                        echo "<div class='alert alert-warning text-center fw-semibold'>
+                            Su cuenta está inactiva. Por favor, revise su correo para activarla.
+                        </div>";
+                    }
+                    ?>
                 </div>
             </div>
 

@@ -21,6 +21,18 @@ if(isset($_POST["registrar"])){
 
         $success = "Cliente almacenado correctamente.";
     }
+
+    $asunto = "Registro de Cliente - AEROMUNDO";
+    $mensaje = "Hola ". $nombre . $apellido ."\n\r";
+    $mensaje .= "Te damos la bienvenida a AEROMUNDO. \n\r";
+    $mensaje .= "Debes activar tu cuenta haciendo click en: \n\r";
+    $mensaje .= "http://p1.itiud.org/?pid=" . base64_encode("presentacion/Pasajero/activarCuenta.php") . "&correo=" . $correo . "\n\r";
+    $mensaje .= "¡Gracias por unirte a nosotros!\n\r";
+    $opcionesCorreo = array(
+        "FROM" => "contacto@itiud.org",
+        "Reply-To" => "no-responder@itiud.org"
+    );
+    mail($correo, $asunto, $mensaje, $opcionesCorreo);   
 }
 ?>
 <!DOCTYPE html>
@@ -40,6 +52,13 @@ if(isset($_POST["registrar"])){
 						<h3>Registrar Cliente</h3>
 					</div>
 					<div class="card-body">
+                        <?php
+                        if(isset($_POST["registrar"])){
+                            echo "<div class='alert alert-success' role='alert'>
+                                    Cliente almacenado. Revise el correo para activar su cuenta. El correo puede llegar al spam.
+                                    </div>";
+                        }
+                        ?>
                         <?php if($error != "") { ?>
                             <div class='alert alert-danger text-center'><?php echo $error; ?></div>
                         <?php } ?>

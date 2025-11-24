@@ -24,7 +24,7 @@ $admin->consultarPorId();
                     if (count($pasajeros) == 0) {
                         echo "<div class='alert alert-warning' role='alert'>
                                 No hay registros de clientes
-                              </div>";
+                            </div>";
                     } else {
                     ?>
                     <table class="table table-striped table-hover text-center align-middle">
@@ -84,7 +84,7 @@ $admin->consultarPorId();
 <?php foreach ($pasajeros as $p) { ?>
     $("#habilitar<?= $p->getId() ?> a").on("click", function(e) {
         e.preventDefault();
-        var url = "cambiarEstadoClienteAjax.php?idCliente=<?= $p->getId() ?>&estado=1";
+        var url = "cambiarEstadoPasajeroAjax.php?idPasajero=<?= $p->getId() ?>&estado=1";
         $("#estado<?= $p->getId() ?>").load(url);
         $("#habilitar<?= $p->getId() ?>").hide();
         $("#deshabilitar<?= $p->getId() ?>").show();
@@ -92,7 +92,7 @@ $admin->consultarPorId();
 
     $("#deshabilitar<?= $p->getId() ?> a").on("click", function(e) {
         e.preventDefault();
-        var url = "cambiarEstadoClienteAjax.php?idCliente=<?= $p->getId() ?>&estado=0";
+        var url = "cambiarEstadoPasajeroAjax.php?idPasajero=<?= $p->getId() ?>&estado=0";
         $("#estado<?= $p->getId() ?>").load(url);
         $("#deshabilitar<?= $p->getId() ?>").hide();
         $("#habilitar<?= $p->getId() ?>").show();

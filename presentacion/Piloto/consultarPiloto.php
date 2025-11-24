@@ -1,7 +1,5 @@
 <?php 
 require_once("logica/Piloto.php");
-$piloto = new Piloto();
-$pilotos = $piloto->consultarTodos();
 
 $id = $_SESSION["id"];
 if ($_SESSION["rol"] != "admin") {
