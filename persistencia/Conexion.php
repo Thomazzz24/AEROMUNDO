@@ -4,12 +4,15 @@ class Conexion {
     private $conexion;
     private $resultado;
 
-private $host = "localhost";
-    private $database = "itiud_aplint";   // SIN espacios ocultos
+    // DATOS DEL SERVIDOR ITIUD (CORRECTOS)
+    private $host = "localhost";
+    private $database = "itiud_aplint2";
     private $username = "itiud_aplint2";
     private $password = "9IGmG24ue&";
 
     public function abrir() {
+
+        // Conexión MySQL
         $this->conexion = @new mysqli(
             $this->host,
             $this->username,
@@ -17,10 +20,12 @@ private $host = "localhost";
             $this->database
         );
 
+        // Validar errores de conexión
         if ($this->conexion->connect_errno) {
             die("Error de conexión: " . $this->conexion->connect_error);
         }
 
+        // Charset UTF-8
         $this->conexion->set_charset("utf8");
     }
 
@@ -34,7 +39,7 @@ private $host = "localhost";
         $this->resultado = $this->conexion->query($sentencia);
 
         if ($this->resultado === false) {
-            echo "Error en la consulta: " . $this->conexion->error;
+            die("Error en la consulta SQL: " . $this->conexion->error . "<br>SQL: $sentencia");
         }
     }
 
