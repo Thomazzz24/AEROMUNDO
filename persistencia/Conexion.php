@@ -9,17 +9,15 @@ public function abrir() {
 
         // --- local ---
         $this->conexion = new mysqli("localhost", "root", "", "aerolinea", 3306);
+} else {
+    $this->conexion = new mysqli(
+        "10.123.0.165",   // Servidor MySQL real en cloudlogin
+        "itiud_aplint2",
+        "9IGmG24ue&",
+        "itiud_aplint2"
+    );
+}
 
-    } else {
-
-        // --- PRODUCCIÓN ---
-        $this->conexion = new mysqli(
-            "usXXX.cloudlogin.co",    // <-- CAMBIA ESTO POR EL HOST REAL DEL PMA
-            "itiud_aplint2",
-            "9IGmG24ue&",
-            "itiud_aplint"
-        );
-    }
 
     if ($this->conexion->connect_errno) {
         die("Error de conexión: " . $this->conexion->connect_error);
