@@ -21,7 +21,7 @@ if(isset($_POST["registrar"])){
 
         $success = "Cliente almacenado correctamente.";
     }
-
+    
     $asunto = "Registro de Cliente - AEROMUNDO";
     $mensaje = "Hola ". $nombre . " " . $apellido ."\n\r";
     $mensaje .= "Te damos la bienvenida a AEROMUNDO. \n\r";
