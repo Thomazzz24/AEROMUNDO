@@ -11,12 +11,13 @@ public function abrir() {
         $this->conexion = new mysqli("localhost", "root", "", "aerolinea", 3306);
 } else {
     $this->conexion = new mysqli(
-        "10.123.0.165",   // Servidor MySQL real en cloudlogin
+        "127.0.0.1",       // Host correcto en cloudlogin
         "itiud_aplint2",
         "9IGmG24ue&",
-        "itiud_aplint"
+        "itiud_aplint2"
     );
 }
+
 
 
     if ($this->conexion->connect_errno) {
