@@ -20,17 +20,17 @@ class AvionDAO {
 
     public function consultarPorId() {
         return "SELECT id_avion, modelo, capacidad, estado
-                FROM avion
+                FROM p1_avion
                 WHERE id_avion = {$this->id}";
     }
 
     public function consultarTodos() {
         return "SELECT id_avion, modelo, capacidad, estado
-                FROM avion";
+                FROM p1_avion";
     }
 
     public function editar() {
-        return "UPDATE avion
+        return "UPDATE p1_avion
                 SET modelo = '{$this->modelo}',
                     capacidad = {$this->capacidad},
                     estado = {$this->estado}
@@ -38,13 +38,13 @@ class AvionDAO {
     }
 
     public function cambiarEstado() {
-        return "UPDATE avion
+        return "UPDATE p1_avion
                 SET estado = {$this->estado}
                 WHERE id_avion = {$this->id}";
     }
 
     public function eliminar() {
-        return "DELETE FROM avion
+        return "DELETE FROM p1_avion
                 WHERE id_avion = {$this->id}";
     }
 

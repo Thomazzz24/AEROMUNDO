@@ -21,7 +21,7 @@ class AdminDAO{
     public function autenticar(){
         return "SELECT u.id_usuario AS id, u.nombre, u.apellido, u.correo,
                     u.estado, u.fecha_registro
-                FROM usuario u
+                FROM p1_usuario u
                 WHERE u.correo = '".$this->correo."'
                 AND u.clave = md5('".$this->clave."')
                 AND u.id_rol = 1
@@ -35,7 +35,7 @@ class AdminDAO{
 
     public function consultarPorId(){
         return "SELECT nombre, apellido, correo, estado
-                FROM usuario 
+                FROM p1_usuario 
                 WHERE id_usuario = ".$this->id;
     }
 }

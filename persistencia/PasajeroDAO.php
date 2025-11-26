@@ -19,15 +19,15 @@ class PasajeroDAO{
         $this->fecharegistro = $fecharegistro;
     }
     public function registrarUsuario(){
-        return "INSERT INTO usuario (nombre, apellido, correo, clave, id_rol, estado)
+        return "INSERT INTO p1_usuario (nombre, apellido, correo, clave, id_rol, estado)
         VALUES ('" . $this->nombre . "', '" . $this->apellido . "', '" . $this->correo . "', md5('" . $this->clave . "'), 2, 1)";
     }
     public function registrarPasajero($idUsuario){
-        return "INSERT INTO pasajero (id_usuario)
+        return "INSERT INTO p1_pasajero (id_usuario)
         VALUES (" . $idUsuario . ")"; 
     }
     public function activar($correo){
-        return "UPDATE usuario
+        return "UPDATE p1_usuario
                 SET estado = '1'
                 WHERE correo = '" . $correo . "'";
     }
@@ -41,13 +41,13 @@ class PasajeroDAO{
                     u.estado,
                     u.fecha_registro AS fecharegistro,
                     p.id_pasajero
-                FROM usuario u
+                FROM p1_usuario u
                 INNER JOIN pasajero p ON p.id_usuario = u.id_usuario";
     }
     public function autenticar(){
         return "SELECT u.id_usuario AS id, u.nombre, u.apellido, u.correo, u.id_rol AS rol, 
                         u.estado, u.fecha_registro AS fecharegistro
-                FROM usuario u
+                FROM p1_usuario u
                 WHERE u.correo = '" . $this->correo . "' 
                     AND u.clave = md5('" . $this->clave . "') 
                     AND u.id_rol = 3       
@@ -56,7 +56,7 @@ class PasajeroDAO{
 
     public function consultarPorId(){
         return "SELECT u.id_usuario AS id, u.nombre, u.apellido, u.correo, u.id_rol AS rol, u.estado, u.fecha_registro AS fecharegistro, p.id_pasajero \n" .
-               "FROM usuario u JOIN pasajero p ON p.id_usuario = u.id_usuario \n" .
+               "FROM p1_usuario u JOIN pasajero p ON p.id_usuario = u.id_usuario \n" .
                "WHERE u.id_usuario = " . $this->id;
     }
     public function consultarTodos(){
@@ -68,13 +68,13 @@ class PasajeroDAO{
                    u.estado,
                    u.fecha_registro AS fecharegistro,
                    p.id_pasajero
-            FROM usuario u
+            FROM p1_usuario u
             INNER JOIN pasajero p ON p.id_usuario = u.id_usuario
             WHERE u.id_rol = 3"; 
 }
 
     public function cambiarEstado($estado){
-        return "UPDATE usuario
+        return "UPDATE p1_usuario
                 SET estado = " . $this->estado . "
                 WHERE id_usuario = " . $this->id;
     }
