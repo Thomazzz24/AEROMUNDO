@@ -3,78 +3,65 @@
 class Conexion {
     private $conexion;
     private $resultado;
-    private $charset = "utf8";
 
-    // --- CONFIG LOCAL ---
-    private $local_host = "localhost";
-    private $local_db   = "aerolinea";
-    private $local_user = "root";
-    private $local_pass = "";
+    public function abrir() {
 
-    // --- CONFIG SERVIDOR ITIUD ---
-    private $server_host = "127.0.0.1";       // ITIUD usa localhost interno
-    private $server_db   = "itiud_aplint2";
-    private $server_user = "itiud_aplint2";
-    private $server_pass = "9IGmG24ue&";
-
-    function abrir() {
-        try {
-
-            // Detectar si estamos en local o en el servidor
-            if ($_SERVER['REMOTE_ADDR'] == "::1") {
-
-                // MODO LOCAL
-                $host = $this->local_host;
-                $db   = $this->local_db;
-                $user = $this->local_user;
-                $pass = $this->local_pass;
-
-            } else {
-
-                // MODO SERVIDOR ITIUD
-                $host = $this->server_host;
-                $db   = $this->server_db;
-                $user = $this->server_user;
-                $pass = $this->server_pass;
-            }
-
-            $options = [
-                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_EMULATE_PREPARES   => false
-            ];
-
-            $this->conexion = new PDO(
-                "mysql:host={$host};dbname={$db};charset={$this->charset}",
-                $user,
-                $pass,
-                $options
+        // Si estás en local (XAMPP)
+        if ($_SERVER['REMOTE_ADDR'] == "::1") {
+            $this->conexion = new mysqli("localhost", "root", "", "aerolinea", 3306);
+        } 
+        // Si estás en el servidor ITIUD
+        else {
+            $this->conexion = new mysqli(
+                "p1.itiud.org",     // 🔥 HOST DEL SERVIDOR ITIUD
+                "itiud_aplint2",    // USUARIO BD
+                "9IGmG24ue&",       // CLAVE BD
+                "itiud_aplint"      // BASE DE DATOS
             );
-
-        } catch (PDOException $e) {
-            die("❌ Error de conexión: " . $e->getMessage());
         }
+
+        // Validar conexión
+        if ($this->conexion->connect_errno) {
+            die("Error de conexión: " . $this->conexion->connect_error);
+        }
+
+        // Charset
+        $this->conexion->set_charset("utf8");
     }
 
     public function cerrar() {
-        $this->conexion = null;
-    }
-
-    public function ejecutar($sql, $parametros = []) {
-        try {
-            $stmt = $this->conexion->prepare($sql);
-            $stmt->execute($parametros);
-            $this->resultado = $stmt;
-        } catch (PDOException $e) {
-            die("❌ Error en la consulta: " . $e->getMessage());
+        if ($this->conexion) {
+            $this->conexion->close();
         }
     }
 
+    public function ejecutar($sentencia) {
+        $this->resultado = $this->conexion->query($sentencia);
+        if ($this->resultado === false) {
+            echo "Error en la consulta: " . $this->conexion->error;
+        }
+    }
+
+    public function extraer() {
+        if ($this->resultado instanceof mysqli_result) {
+            return $this->resultado->fetch_row();
+        }
+        return null;
+    }
+
     public function registro() {
-        return $this->resultado->fetch(PDO::FETCH_ASSOC);
+        if ($this->resultado instanceof mysqli_result) {
+            return $this->resultado->fetch_assoc();
+        }
+        return null;
     }
 
     public function filas() {
-        return $this->resultado->rowCount();
+        return $this->resultado instanceof mysqli_result ? $this->resultado->num_rows : 0;
+    }
+
+    public function ultimoId() {
+        return $this->conexion ? $this->conexion->insert_id : null;
     }
 }
 
