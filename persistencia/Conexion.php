@@ -14,7 +14,7 @@ public function abrir() {
         "10.123.0.165",   // Servidor MySQL real en cloudlogin
         "itiud_aplint2",
         "9IGmG24ue&",
-        "itiud_aplint2"
+        "itiud_aplint"
     );
 }
 
