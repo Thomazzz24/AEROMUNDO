@@ -10,9 +10,9 @@ class Conexion {
         } else {
             $this->conexion = new mysqli(
                 "localhost", 
-                "itiud_aplint2", 
+                "itiud_aplint", 
                 "9IGmG24ue&", 
-                "itiud_aplint2"
+                "itiud_aplint"
             );
         }
 
