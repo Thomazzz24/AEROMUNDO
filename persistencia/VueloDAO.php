@@ -28,7 +28,7 @@ class VueloDAO {
         $this->id_vuelo = $id_vuelo;
         $this->id_ruta = $id_ruta;
         $this->id_avion = $id_avion;
-        $this->id_piloto_principal = $id_piloto_principal;
+        $this->id_piloto_principal = $id_piloto_principal; 
         $this->id_copiloto = $id_copiloto;
         $this->fecha_salida = $fecha_salida;
         $this->fecha_llegada = $fecha_llegada;
@@ -124,7 +124,7 @@ class VueloDAO {
     public function pilotoDisponible($fecha_salida, $fecha_llegada) {
         return "SELECT p.id_piloto, u.nombre, u.apellido
                 FROM p1_piloto p
-                INNER JOIN usuario u ON p.id_usuario = u.id_usuario
+                INNER JOIN p1_usuario u ON p.id_usuario = u.id_usuario
                 WHERE u.estado = 1
                 AND p.id_piloto NOT IN (
                     SELECT v.id_piloto_principal 

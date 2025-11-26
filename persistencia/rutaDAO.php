@@ -14,7 +14,7 @@ class RutaDAO {
     }
 
     public function registrar() {
-        return "INSERT INTO ruta (origen, destino, duracion_estimada)
+        return "INSERT INTO p1_ruta (origen, destino, duracion_estimada)
                 VALUES ('{$this->origen}', '{$this->destino}', '{$this->duracion}')";
     }
 

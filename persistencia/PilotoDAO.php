@@ -25,7 +25,7 @@ class PilotoDAO{
                     u.id_rol AS rol, u.estado, u.fecha_registro AS fecharegistro, 
                     p.foto_perfil
             FROM p1_usuario u 
-            JOIN piloto p ON p.id_usuario = u.id_usuario 
+            JOIN p1_piloto p ON p.id_usuario = u.id_usuario 
             WHERE u.correo = '" . $this->correo . "' 
                 AND u.clave = md5('" . $this->clave . "') 
                 AND u.id_rol = 2 
@@ -47,7 +47,7 @@ class PilotoDAO{
                     u.id_rol AS rol, u.estado, u.fecha_registro AS fecharegistro, 
                     pi.id_piloto, pi.foto_perfil
             FROM p1_usuario u 
-            JOIN piloto pi ON pi.id_usuario = u.id_usuario 
+            JOIN p1_piloto pi ON pi.id_usuario = u.id_usuario 
             WHERE u.id_usuario = " . $this->id;
     }
     public function consultarTodos() {
@@ -61,7 +61,7 @@ class PilotoDAO{
                 u.fecha_registro AS fecharegistro,
                 p.foto_perfil
             FROM p1_usuario u
-            JOIN piloto p ON p.id_usuario = u.id_usuario
+            JOIN p1_piloto p ON p.id_usuario = u.id_usuario
             WHERE u.id_rol = 2";
     }
     public function cambiarEstado($estado){
@@ -69,7 +69,7 @@ class PilotoDAO{
     }
     public function editarPiloto() {
     return "UPDATE p1_usuario u
-            JOIN piloto p ON p.id_usuario = u.id_usuario
+            JOIN p1_piloto p ON p.id_usuario = u.id_usuario
             SET u.nombre = '" . $this->nombre . "',
                 u.apellido = '" . $this->apellido . "',
                 u.correo = '" . $this->correo . "'" .

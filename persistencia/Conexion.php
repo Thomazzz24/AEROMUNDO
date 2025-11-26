@@ -8,12 +8,14 @@ class Conexion {
         if ($_SERVER['REMOTE_ADDR'] == "::1") {
             $this->conexion = new mysqli("localhost", "root", "", "aerolinea", 3306);
         } else {
-         $this->conexion = new mysqli(
+     $this->conexion = new mysqli(
     "localhost",
-    "itiud_aplint2",     
-    "9IGmG24ue&",
-    "itiud_aplint2"
+    "itiud_aplint2",   // usuario
+    "9IGmG24ue&",      // clave
+    "itiud_aplint"     // <<-- la base de datos REAL
 );
+
+
 
         }
 
