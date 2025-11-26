@@ -42,7 +42,7 @@ class PasajeroDAO{
                     u.fecha_registro AS fecharegistro,
                     p.id_pasajero
                 FROM p1_usuario u
-                INNER JOIN pasajero p ON p.id_usuario = u.id_usuario";
+                INNER JOIN p1_pasajero p ON p.id_usuario = u.id_usuario";
     }
     public function autenticar(){
         return "SELECT u.id_usuario AS id, u.nombre, u.apellido, u.correo, u.id_rol AS rol, 

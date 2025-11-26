@@ -14,7 +14,7 @@ class AvionDAO {
     }
 
     public function registrar() {
-        return "INSERT INTO avion (modelo, capacidad, estado)
+        return "INSERT INTO p1_avion (modelo, capacidad, estado)
                 VALUES ('{$this->modelo}', {$this->capacidad}, {$this->estado})";
     }
 

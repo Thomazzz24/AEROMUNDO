@@ -28,7 +28,7 @@ class AdminDAO{
                 AND u.estado = 1";
     }
     public function registrar(){
-        return "INSERT INTO usuario (nombre, apellido, correo, clave, id_rol, estado)
+        return "INSERT INTO p1_usuario (nombre, apellido, correo, clave, id_rol, estado)
                 VALUES ('".$this->nombre."', '".$this->apellido."', '".$this->correo."', 
                 md5('".$this->clave."'), 1, 1)";
     }
