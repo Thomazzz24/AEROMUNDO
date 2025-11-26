@@ -1,32 +1,32 @@
 <?php
 
 class Conexion {
-    private $conexion;
+       private $conexion;
     private $resultado;
+    private $charset="utf8";
+    private $hosname = "localhost";
 
-    public function abrir() {
+    //private $databadase = "aeropuerto";
+    //private $username = "root";
+    //private $password = "";
 
-        // Si estás en local (XAMPP)
-        if ($_SERVER['REMOTE_ADDR'] == "::1") {
-            $this->conexion = new mysqli("localhost", "root", "", "aerolinea", 3306);
-        } 
-        // Si estás en el servidor ITIUD
-        else {
-            $this->conexion = new mysqli(
-                "p1.itiud.org",     // 🔥 HOST DEL SERVIDOR ITIUD
-                "itiud_aplint2",    // USUARIO BD
-                "9IGmG24ue&",       // CLAVE BD
-                "itiud_aplint"      // BASE DE DATOS
-            );
+    private $databadase = "	itiud_aplint2";
+    private $username = "itiud_aplint2";
+    private $password = "GYesgQ118&";
+    
+    function abrir(){
+        try{
+            $option = [
+                PDO::ATTR_ERRMODE =>PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_EMULATE_PREPARES => false
+            ];
+            $this->conexion = new PDO("mysql:host={$this->hosname};dbname={$this->databadase};charset={$this->charset}", 
+                                    $this->username, 
+                                    $this->password,
+                                    $option);
+        }catch(PDOException $e){
+            return $e->getMessage();
         }
-
-        // Validar conexión
-        if ($this->conexion->connect_errno) {
-            die("Error de conexión: " . $this->conexion->connect_error);
-        }
-
-        // Charset
-        $this->conexion->set_charset("utf8");
     }
 
     public function cerrar() {
