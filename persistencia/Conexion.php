@@ -1,32 +1,27 @@
 <?php
 
 class Conexion {
-       private $conexion;
+    private $conexion;
     private $resultado;
-    private $charset="utf8";
-    private $hosname = "localhost";
 
-    //private $databadase = "aeropuerto";
-    //private $username = "root";
-    //private $password = "";
-
-    private $databadase = "	itiud_aplint2";
+    private $host = "localhost";
+    private $database = "itiud_aplint";   // SIN espacios ocultos
     private $username = "itiud_aplint2";
-    private $password = "GYesgQ118&";
-    
-    function abrir(){
-        try{
-            $option = [
-                PDO::ATTR_ERRMODE =>PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_EMULATE_PREPARES => false
-            ];
-            $this->conexion = new PDO("mysql:host={$this->hosname};dbname={$this->databadase};charset={$this->charset}", 
-                                    $this->username, 
-                                    $this->password,
-                                    $option);
-        }catch(PDOException $e){
-            return $e->getMessage();
+    private $password = "9IGmG24ue&";
+
+    public function abrir() {
+        $this->conexion = @new mysqli(
+            $this->host,
+            $this->username,
+            $this->password,
+            $this->database
+        );
+
+        if ($this->conexion->connect_errno) {
+            die("Error de conexión: " . $this->conexion->connect_error);
         }
+
+        $this->conexion->set_charset("utf8");
     }
 
     public function cerrar() {
@@ -37,16 +32,10 @@ class Conexion {
 
     public function ejecutar($sentencia) {
         $this->resultado = $this->conexion->query($sentencia);
+
         if ($this->resultado === false) {
             echo "Error en la consulta: " . $this->conexion->error;
         }
-    }
-
-    public function extraer() {
-        if ($this->resultado instanceof mysqli_result) {
-            return $this->resultado->fetch_row();
-        }
-        return null;
     }
 
     public function registro() {
@@ -56,8 +45,17 @@ class Conexion {
         return null;
     }
 
+    public function extraer() {
+        if ($this->resultado instanceof mysqli_result) {
+            return $this->resultado->fetch_row();
+        }
+        return null;
+    }
+
     public function filas() {
-        return $this->resultado instanceof mysqli_result ? $this->resultado->num_rows : 0;
+        return ($this->resultado instanceof mysqli_result)
+            ? $this->resultado->num_rows
+            : 0;
     }
 
     public function ultimoId() {
