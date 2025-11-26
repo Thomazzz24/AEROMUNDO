@@ -23,10 +23,10 @@ if(isset($_POST["registrar"])){
     }
 
     $asunto = "Registro de Cliente - AEROMUNDO";
-    $mensaje = "Hola ". $nombre . $apellido ."\n\r";
+    $mensaje = "Hola ". $nombre . " " . $apellido ."\n\r";
     $mensaje .= "Te damos la bienvenida a AEROMUNDO. \n\r";
     $mensaje .= "Debes activar tu cuenta haciendo click en: \n\r";
-    $mensaje .= "http://p1.itiud.org/?pid=" . base64_encode("presentacion/Pasajero/activarCuenta.php") . "&correo=" . $correo . "\n\r";
+    $mensaje .= "http://p1.itiud.org/?pid=" . base64_encode("presentacion/Pasajero/activarPasajero.php") . "&correo=" . base64_encode($correo) . "\n\r";
     $mensaje .= "¡Gracias por unirte a nosotros!\n\r";
     $opcionesCorreo = array(
         "FROM" => "contacto@itiud.org",

@@ -1,6 +1,7 @@
 <?php
 $vuelo = new Vuelo();
 $vuelos = $vuelo->consultarTodos();
+
 ?>
 
 <div class="container mt-4">

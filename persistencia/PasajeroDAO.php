@@ -20,7 +20,8 @@ class PasajeroDAO{
     }
     public function registrarUsuario(){
         return "INSERT INTO p1_usuario (nombre, apellido, correo, clave, id_rol, estado)
-        VALUES ('" . $this->nombre . "', '" . $this->apellido . "', '" . $this->correo . "', md5('" . $this->clave . "'), 2, 1)";
+        VALUES ('" . $this->nombre . "', '" . $this->apellido . "', '" . $this->correo . "', md5('" . $this->clave . "'), 3, 0)";
+
     }
     public function registrarPasajero($idUsuario){
         return "INSERT INTO p1_pasajero (id_usuario)

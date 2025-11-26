@@ -138,4 +138,30 @@ class VueloDAO {
                 )";
     }
 
+    public function consultarProximosVuelos(){
+        return "SELECT
+                    v.id_vuelo,
+                    v.id_ruta,  
+                    v.id_avion,
+                    v.id_piloto_principal,
+                    v.id_copiloto,
+                    r.origen,
+                    r.destino,
+                    a.modelo,
+                    v.fecha_salida,
+                    v.fecha_llegada,
+                    v.estado,
+                    CONCAT(u1.nombre, ' ', u1.apellido) AS piloto_principal,
+                    CONCAT(u2.nombre, ' ', u2.apellido) AS copiloto
+                FROM vuelo v
+                INNER JOIN ruta r ON v.id_ruta = r.id_ruta
+                INNER JOIN avion a ON v.id_avion = a.id_avion
+                INNER JOIN piloto p1 ON v.id_piloto_principal = p1.id_piloto
+                INNER JOIN usuario u1 ON p1.id_usuario = u1.id_usuario
+                LEFT JOIN piloto p2 ON v.id_copiloto = p2.id_piloto
+                LEFT JOIN usuario u2 ON p2.id_usuario = u2.id_usuario
+                WHERE v.fecha_salida >= NOW()
+                ORDER BY v.fecha_salida ASC";
+    }
+
 }

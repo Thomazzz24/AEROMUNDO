@@ -169,4 +169,30 @@ class Vuelo {
         return $resultados;
         
     }
+    public function consultarProximosVuelos(){
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $dao = new vueloDAO();
+        $conexion->ejecutar($dao->consultarProximosVuelos());
+        $resultados = [];
+        while ($tupla = $conexion->registro()) {
+            $vuelo = new Vuelo($tupla["id_vuelo"]);
+            $vuelo->id_ruta = $tupla["id_ruta"];
+            $vuelo->id_avion = $tupla["id_avion"];
+            $vuelo->id_piloto_principal = $tupla["id_piloto_principal"];
+            $vuelo->id_copiloto = $tupla["id_copiloto"];
+            $vuelo->fecha_salida = $tupla["fecha_salida"];
+            $vuelo->fecha_llegada = $tupla["fecha_llegada"];
+            $vuelo->estado = $tupla["estado"];
+            $vuelo->origen = $tupla["origen"];
+            $vuelo->destino = $tupla["destino"];
+            $vuelo->modelo = $tupla["modelo"];
+            $vuelo->piloto_principal = $tupla["piloto_principal"];
+            $vuelo->copiloto = $tupla["copiloto"];
+            array_push($resultados, $vuelo);
+        }
+
+        $conexion->cerrar();
+        return $resultados;
+    }
 }
