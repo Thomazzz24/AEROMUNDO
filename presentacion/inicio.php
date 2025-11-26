@@ -1,3 +1,11 @@
+<?php
+require_once("logica/Vuelo.php");
+$v = new Vuelo();
+$listaVuelos = $v->consultarProximosVuelos();
+?>
+
+
+
 <body class="bg-light">
 	<!-- NAVBAR -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top shadow-sm">
@@ -24,7 +32,7 @@
                 </ul>
 
                 <a href="?pid=<?php echo base64_encode('autenticacion/autenticar.php'); ?>" 
-                   class="btn btn-outline-light ms-3">
+                    class="btn btn-outline-light ms-3">
                     <i class="fa-solid fa-user me-1"></i> Iniciar Sesión
                 </a>
             </div>
@@ -67,57 +75,57 @@
         </button>
     </div>
 
-    <!-- DESTINOS POPULARES -->
+    <!-- VUELOS DISPONIBLES -->
     <div class="container my-5">
-        <h2 class="text-center mb-4 text-danger fw-bold">Destinos Populares</h2>
+        <h2 class="text-center mb-4 text-danger fw-bold">Vuelos Disponibles</h2>
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
 
-            <!-- DESTINO CARD -->
+            <?php foreach ($listaVuelos as $vuelo): ?>
+
             <div class="col">
                 <div class="card h-100 shadow-sm border-0">
-                    <img src="img/paris.jpeg" class="card-img-top" alt="París">
+
+                    <!-- Imagen dinámica según destino (opcional) -->
+                    <?php
+                    $img = "img/default.jpg";
+                    if ($vuelo->getDestino() == "Cartagena") $img = "img/cartagena2.jpg";
+                    if ($vuelo->getDestino() == "Madrid") $img = "img/madrid.webp";
+                    if ($vuelo->getDestino() == "Medellín") $img = "img/medellin.jpg";
+                    if ($vuelo->getDestino() == "Cali") $img = "img/cali.jpg";
+                    if ($vuelo->getDestino() == "Santa Marta") $img = "img/santaMarta.jpg";
+                    if ($vuelo->getDestino() == "Pereira") $img = "img/pereira.jpg";
+                    if ($vuelo->getDestino() == "Bogota") $img = "img/bogota.jpg";
+                    ?>
+                    
+                    <img src="<?= $img ?>" class="card-img-top" style="height:200px; object-fit:cover;">
+
                     <div class="card-body">
-                        <h5 class="card-title fw-bold text-danger">París</h5>
-                        <p class="card-text">Vuela a la ciudad del amor y disfruta su historia, arte y gastronomía.</p>
-                        <p class="fw-bold text-dark">Desde $2.400.000 COP</p>
-                        <button class="btn btn-danger w-100">
+                        <h5 class="card-title fw-bold text-danger">
+                            <?= $vuelo->getOrigen() ?> → <?= $vuelo->getDestino() ?>
+                        </h5>
+
+                        <p class="card-text">
+                            <strong>Fecha salida:</strong> <?= date("d/m/Y H:i", strtotime($vuelo->getFecha_salida())) ?><br>
+                            <strong>Fecha llegada:</strong> <?= date("d/m/Y H:i", strtotime($vuelo->getFecha_llegada())) ?><br>
+                            <strong>Avión:</strong> <?= $vuelo->getModelo() ?><br>
+                            <strong>Piloto:</strong> <?= $vuelo->getPiloto_principal() ?><br>
+                            <strong>Copiloto:</strong> <?= $vuelo->getCopiloto() ?>
+                        </p>
+
+                        <a href="?pid=<?= base64_encode('cliente/reservarVuelo.php')?>&idVuelo=<?= $vuelo->getId_vuelo() ?>"
+                            class="btn btn-danger w-100">
                             <i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
-                <div class="card h-100 shadow-sm border-0">
-                    <img src="img/cartagena.jpeg" class="card-img-top" alt="Cartagena">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold text-danger">Cartagena</h5>
-                        <p class="card-text">Playas caribeñas, historia y cultura colonial en un solo destino.</p>
-                        <p class="fw-bold text-dark">Desde $420.000 COP</p>
-                        <button class="btn btn-danger w-100">
-                            <i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card h-100 shadow-sm border-0">
-                    <img src="img/madrid.webp" class="card-img-top" alt="Madrid">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold text-danger">Madrid</h5>
-                        <p class="card-text">Descubre la energía y cultura de una de las capitales más vibrantes de Europa.</p>
-                        <p class="fw-bold text-dark">Desde $3.000.000 COP</p>
-                        <button class="btn btn-danger w-100">
-                            <i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
 
         </div>
     </div>
+
 
     <!-- FOOTER ROJO -->
     <footer class="bg-danger text-white text-center py-4 mt-5 shadow-sm">

@@ -19,8 +19,13 @@ class PasajeroDAO{
         $this->fecharegistro = $fecharegistro;
     }
     public function registrarUsuario(){
+<<<<<<< Updated upstream
         return "INSERT INTO p1_usuario (nombre, apellido, correo, clave, id_rol, estado)
         VALUES ('" . $this->nombre . "', '" . $this->apellido . "', '" . $this->correo . "', md5('" . $this->clave . "'), 2, 1)";
+=======
+        return "INSERT INTO usuario (nombre, apellido, correo, clave, id_rol, estado)
+        VALUES ('" . $this->nombre . "', '" . $this->apellido . "', '" . $this->correo . "', md5('" . $this->clave . "'), 3, 0)";
+>>>>>>> Stashed changes
     }
     public function registrarPasajero($idUsuario){
         return "INSERT INTO p1_pasajero (id_usuario)
