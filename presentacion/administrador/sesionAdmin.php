@@ -66,7 +66,7 @@ include 'presentacion/administrador/menuAdministrador.php';
 </div>
 
 <?php
-include 'presentacion/vuelos/consultarVuelos.php';
+include 'presentacion/Vuelos/consultarVuelos.php';
 ?>
 
 
