@@ -1,52 +1,66 @@
 <?php
-require_once("persistencia/Conexion.php");
-require_once("persistencia/AdminDAO.php");
-class Admin extends Persona {
-    public function __construct($id=0, $nombre="", $apellido="", $correo="", $clave="", $rol=0, $estado=0, $fecharegistro="") {
-        parent::__construct($id, $nombre, $apellido, $correo, $clave, $rol, $estado, $fecharegistro);
-    }
-    public function autenticar(){
-        $conexion = new Conexion();
-        $conexion->abrir();
-        $adminDAO = new AdminDAO("", "", "", $this->correo, $this->clave, "", "", "");
-        $conexion->ejecutar($adminDAO->autenticar());
-        $tupla = $conexion->registro();
-        $conexion->cerrar();
-        if($tupla != null){
-            $this->id = $tupla["id"];
-            $this->nombre = $tupla["nombre"];
-            $this->apellido = $tupla["apellido"];
-            $this->correo = $tupla["correo"];
-            $this->rol = 1;
-            $this->estado = $tupla["estado"];
-            $this->fecharegistro = $tupla["fecharegistro"];
-            return true;
-        } else {
-            return false;
+
+class Conexion {
+    private $conexion;
+    private $resultado;
+
+    private $host = "localhost";
+    private $database = "itiud_aplint";   // SIN espacios ocultos
+    private $username = "itiud_aplint2";
+    private $password = "9IGmG24ue&";
+
+    public function abrir() {
+        $this->conexion = @new mysqli(
+            $this->host,
+            $this->username,
+            $this->password,
+            $this->database
+        );
+
+        if ($this->conexion->connect_errno) {
+            die("Error de conexión: " . $this->conexion->connect_error);
         }
-    }
-    public function registrar(){
-        $conexion = new Conexion();
-        $conexion->abrir();
-        $adminDAO = new AdminDAO("", $this->nombre, $this->apellido, $this->correo, $this->clave, "admin", "activo", "");
-        $conexion->ejecutar($adminDAO->registrar());
-        $conexion->cerrar();
+
+        $this->conexion->set_charset("utf8");
     }
 
-    public function consultarPorId(){
-        $conexion = new Conexion();
-        $conexion->abrir();
-        $adminDAO = new AdminDAO($this->id, "", "", "", "", "", "", "");
-        $conexion->ejecutar($adminDAO->consultarPorId());
-        $tupla = $conexion->registro();
-        $conexion->cerrar();
-        if($tupla != null){
-            $this->nombre = $tupla["nombre"];
-            $this->apellido = $tupla["apellido"];
-            $this->correo = $tupla["correo"];
-            $this->estado = $tupla["estado"];
-            return true;
+    public function cerrar() {
+        if ($this->conexion) {
+            $this->conexion->close();
         }
-        return false;
+    }
+
+    public function ejecutar($sentencia) {
+        $this->resultado = $this->conexion->query($sentencia);
+
+        if ($this->resultado === false) {
+            echo "Error en la consulta: " . $this->conexion->error;
+        }
+    }
+
+    public function registro() {
+        if ($this->resultado instanceof mysqli_result) {
+            return $this->resultado->fetch_assoc();
+        }
+        return null;
+    }
+
+    public function extraer() {
+        if ($this->resultado instanceof mysqli_result) {
+            return $this->resultado->fetch_row();
+        }
+        return null;
+    }
+
+    public function filas() {
+        return ($this->resultado instanceof mysqli_result)
+            ? $this->resultado->num_rows
+            : 0;
+    }
+
+    public function ultimoId() {
+        return $this->conexion ? $this->conexion->insert_id : null;
     }
 }
+
+?>
