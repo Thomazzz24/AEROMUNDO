@@ -1,5 +1,5 @@
 <?php
-require_once ("logica/Ruta.php");
+require_once ("logica/ruta.php");
 
 $id =  $_SESSION["id"];
 if ($_SESSION["rol"] != "admin") {
