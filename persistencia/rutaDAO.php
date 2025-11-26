@@ -20,17 +20,17 @@ class RutaDAO {
 
     public function consultarPorId() {
         return "SELECT id_ruta, origen, destino, duracion_estimada
-                FROM ruta
+                FROM p1_ruta
                 WHERE id_ruta = {$this->id}";
     }
 
     public function consultarTodos() {
         return "SELECT id_ruta, origen, destino, duracion_estimada
-                FROM ruta";
+                FROM p1_ruta";
     }
 
     public function editar() {
-        return "UPDATE ruta
+        return "UPDATE p1_ruta
                 SET origen = '{$this->origen}',
                     destino = '{$this->destino}',
                     duracion_estimada = {$this->duracion}
@@ -38,7 +38,7 @@ class RutaDAO {
     }
 
     public function eliminar() {
-        return "DELETE FROM ruta
+        return "DELETE FROM p1_ruta
                 WHERE id_ruta = {$this->id}";
     }
 }

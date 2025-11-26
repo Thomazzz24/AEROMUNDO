@@ -36,7 +36,7 @@ class VueloDAO {
     }
 
     public function registrar() {
-        return "INSERT INTO vuelo
+        return "INSERT INTO p1_vuelo
                 (id_ruta, id_avion, id_piloto_principal, id_copiloto, fecha_salida, fecha_llegada, estado)
                 VALUES (
                     '{$this->id_ruta}',
@@ -59,7 +59,7 @@ class VueloDAO {
                     fecha_salida,
                     fecha_llegada,
                     estado
-                FROM vuelo
+                FROM p1_vuelo
                 WHERE id_vuelo = {$this->id_vuelo}";
     }
 
@@ -78,21 +78,21 @@ class VueloDAO {
                 v.estado,
                 CONCAT(u1.nombre, ' ', u1.apellido) AS piloto_principal,
                 CONCAT(u2.nombre, ' ', u2.apellido) AS copiloto
-            FROM vuelo v
+            FROM p1_vuelo v
 
-            INNER JOIN ruta r ON v.id_ruta = r.id_ruta
-            INNER JOIN avion a ON v.id_avion = a.id_avion
+            INNER JOIN p1_ruta r ON v.id_ruta = r.id_ruta
+            INNER JOIN p1_avion a ON v.id_avion = a.id_avion
 
-            INNER JOIN piloto p1 ON v.id_piloto_principal = p1.id_piloto
-            INNER JOIN usuario u1 ON p1.id_usuario = u1.id_usuario
-            LEFT JOIN piloto p2 ON v.id_copiloto = p2.id_piloto
-            LEFT JOIN usuario u2 ON p2.id_usuario = u2.id_usuario
+            INNER JOIN p1_piloto p1 ON v.id_piloto_principal = p1.id_piloto
+            INNER JOIN p1_usuario u1 ON p1.id_usuario = u1.id_usuario
+            LEFT JOIN p1_piloto p2 ON v.id_copiloto = p2.id_piloto
+            LEFT JOIN p1_usuario u2 ON p2.id_usuario = u2.id_usuario
 
             ORDER BY v.fecha_salida ASC;";
     }
 
     public function editar() {
-        return "UPDATE vuelo SET
+        return "UPDATE p1_vuelo SET
                     id_ruta = '{$this->id_ruta}',
                     id_avion = '{$this->id_avion}',
                     id_piloto_principal = '{$this->id_piloto_principal}',
@@ -104,17 +104,17 @@ class VueloDAO {
     }
 
     public function eliminar() {
-        return "DELETE FROM vuelo
+        return "DELETE FROM p1_vuelo
                 WHERE id_vuelo = {$this->id_vuelo}";
     }
 
     public function avionDisponible($fecha_salida, $fecha_llegada) {
         return "SELECT a.id_avion, a.modelo, a.capacidad
-                FROM avion a
+                FROM p1_avion a
                 WHERE a.estado = 1
                 AND a.id_avion NOT IN (
                     SELECT v.id_avion
-                    FROM vuelo v
+                    FROM p1_vuelo v
                     WHERE v.fecha_salida <= '$fecha_llegada'
                     AND v.fecha_llegada >= '$fecha_salida'
                     )
@@ -123,17 +123,17 @@ class VueloDAO {
 
     public function pilotoDisponible($fecha_salida, $fecha_llegada) {
         return "SELECT p.id_piloto, u.nombre, u.apellido
-                FROM piloto p
+                FROM p1_piloto p
                 INNER JOIN usuario u ON p.id_usuario = u.id_usuario
                 WHERE u.estado = 1
                 AND p.id_piloto NOT IN (
                     SELECT v.id_piloto_principal 
-                    FROM vuelo v 
+                    FROM p1_vuelo v 
                     WHERE (fecha_salida <= '$fecha_llegada' AND fecha_llegada >= '$fecha_salida')
                 )
                 AND p.id_piloto NOT IN (
                     SELECT v.id_copiloto 
-                    FROM vuelo v 
+                    FROM p1_vuelo v 
                     WHERE (v.fecha_salida <= '$fecha_llegada' AND v.fecha_llegada >= '$fecha_salida')
                 )";
     }
