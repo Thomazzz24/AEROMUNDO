@@ -4,7 +4,7 @@ class Conexion {
     private $conexion;
     private $resultado;
 
-    private $host = "localhost";
+private $host = "10.123.0.165";
     private $database = "itiud_aplint";   // SIN espacios ocultos
     private $username = "itiud_aplint2";
     private $password = "9IGmG24ue&";
