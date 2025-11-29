@@ -9,7 +9,8 @@ class VueloDAO {
     private $fecha_salida;
     private $fecha_llegada;
     private $estado;
-    
+    private $precio;
+
     // Variables adicionales para mostrar datos del JOIN
     private $origen;
     private $destino;
@@ -23,21 +24,23 @@ class VueloDAO {
         $id_copiloto = "",
         $fecha_salida = "",
         $fecha_llegada = "",
-        $estado = ""
+        $estado = "",
+        $precio = ""
     ) {
         $this->id_vuelo = $id_vuelo;
         $this->id_ruta = $id_ruta;
         $this->id_avion = $id_avion;
-        $this->id_piloto_principal = $id_piloto_principal; 
+        $this->id_piloto_principal = $id_piloto_principal;
         $this->id_copiloto = $id_copiloto;
         $this->fecha_salida = $fecha_salida;
         $this->fecha_llegada = $fecha_llegada;
         $this->estado = $estado;
+        $this->precio = $precio;
     }
 
     public function registrar() {
         return "INSERT INTO p1_vuelo
-                (id_ruta, id_avion, id_piloto_principal, id_copiloto, fecha_salida, fecha_llegada, estado)
+                (id_ruta, id_avion, id_piloto_principal, id_copiloto, fecha_salida, fecha_llegada, estado, precio)
                 VALUES (
                     '{$this->id_ruta}',
                     '{$this->id_avion}',
@@ -45,22 +48,37 @@ class VueloDAO {
                     '{$this->id_copiloto}',
                     '{$this->fecha_salida}',
                     '{$this->fecha_llegada}',
-                    '{$this->estado}'
+                    '{$this->estado}',
+                    '{$this->precio}'
                 )";
     }
 
     public function consultarPorId() {
-        return "SELECT 
-                    id_vuelo,
-                    id_ruta,
-                    id_avion,
-                    id_piloto_principal,
-                    id_copiloto,
-                    fecha_salida,
-                    fecha_llegada,
-                    estado
-                FROM p1_vuelo
-                WHERE id_vuelo = {$this->id_vuelo}";
+        return "
+        SELECT 
+            v.id_vuelo,
+            v.id_ruta,
+            v.id_avion,
+            v.id_piloto_principal,
+            v.id_copiloto,
+            v.fecha_salida,
+            v.fecha_llegada,
+            v.estado,
+            v.precio,
+            r.origen,
+            r.destino,
+            a.modelo,
+            CONCAT(u1.nombre, ' ', u1.apellido) AS piloto_principal,
+            CONCAT(u2.nombre, ' ', u2.apellido) AS copiloto
+        FROM p1_vuelo v
+        INNER JOIN p1_ruta r ON v.id_ruta = r.id_ruta
+        INNER JOIN p1_avion a ON v.id_avion = a.id_avion
+        INNER JOIN p1_piloto p1 ON v.id_piloto_principal = p1.id_piloto
+        INNER JOIN p1_usuario u1 ON p1.id_usuario = u1.id_usuario
+        LEFT JOIN p1_piloto p2 ON v.id_copiloto = p2.id_piloto
+        LEFT JOIN p1_usuario u2 ON p2.id_usuario = u2.id_usuario
+        WHERE v.id_vuelo = {$this->id_vuelo}
+        ";
     }
 
     function consultarTodos() {
@@ -76,18 +94,16 @@ class VueloDAO {
                 v.fecha_salida,
                 v.fecha_llegada,
                 v.estado,
+                v.precio,
                 CONCAT(u1.nombre, ' ', u1.apellido) AS piloto_principal,
                 CONCAT(u2.nombre, ' ', u2.apellido) AS copiloto
             FROM p1_vuelo v
-
             INNER JOIN p1_ruta r ON v.id_ruta = r.id_ruta
             INNER JOIN p1_avion a ON v.id_avion = a.id_avion
-
             INNER JOIN p1_piloto p1 ON v.id_piloto_principal = p1.id_piloto
             INNER JOIN p1_usuario u1 ON p1.id_usuario = u1.id_usuario
             LEFT JOIN p1_piloto p2 ON v.id_copiloto = p2.id_piloto
             LEFT JOIN p1_usuario u2 ON p2.id_usuario = u2.id_usuario
-
             ORDER BY v.fecha_salida ASC;";
     }
 
@@ -99,7 +115,8 @@ class VueloDAO {
                     id_copiloto = '{$this->id_copiloto}',
                     fecha_salida = '{$this->fecha_salida}',
                     fecha_llegada = '{$this->fecha_llegada}',
-                    estado = '{$this->estado}'
+                    estado = '{$this->estado}',
+                    precio = '{$this->precio}'
                 WHERE id_vuelo = {$this->id_vuelo}";
     }
 
@@ -107,6 +124,8 @@ class VueloDAO {
         return "DELETE FROM p1_vuelo
                 WHERE id_vuelo = {$this->id_vuelo}";
     }
+
+    // ... avionDisponible y pilotoDisponible permanecen igual ...
 
     public function avionDisponible($fecha_salida, $fecha_llegada) {
         return "SELECT a.id_avion, a.modelo, a.capacidad
@@ -151,6 +170,7 @@ class VueloDAO {
                     v.fecha_salida,
                     v.fecha_llegada,
                     v.estado,
+                    v.precio,
                     CONCAT(u1.nombre, ' ', u1.apellido) AS piloto_principal,
                     CONCAT(u2.nombre, ' ', u2.apellido) AS copiloto
                 FROM p1_vuelo v
@@ -163,6 +183,5 @@ class VueloDAO {
                 WHERE v.fecha_salida >= NOW()
                 ORDER BY v.fecha_salida ASC";
     }
-
 
 }

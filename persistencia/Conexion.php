@@ -16,7 +16,7 @@ class Conexion {
             
             // 🔵 CONFIGURACIÓN LOCAL
             $this->host = "localhost";
-            $this->database = "aeropuerto";    // <-- PON AQUÍ TU BD LOCAL
+            $this->database = "aereolineaa";    // <-- PON AQUÍ TU BD LOCAL
             $this->username = "root";
             $this->password = "";
         

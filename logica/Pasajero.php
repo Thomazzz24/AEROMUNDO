@@ -17,7 +17,7 @@ class Pasajero extends Persona
         $tupla = $conexion->registro();
         $conexion->cerrar();
         if ($tupla != null) {
-            $this->id = $tupla["id"];
+            $this->id = $tupla["id_pasajero"];
             $this->nombre = $tupla["nombre"];
             $this->apellido = $tupla["apellido"];
             $this->rol = $tupla["rol"];
@@ -38,14 +38,15 @@ class Pasajero extends Persona
         $conexion->ejecutar($pasajeroDAO->registrarPasajero($idUsuario));
         $conexion->cerrar();
     }
-    public function activar($correo)
-    {
-        $conexion = new Conexion();
-        $conexion->abrir();
-        $pasajeroDAO = new PasajeroDAO("", "", "", $correo, "", "", "", "");
-        $conexion->ejecutar($pasajeroDAO->activar($correo));
-        $conexion->cerrar();
-    }
+  public function activar($correo)
+{
+    $conexion = new Conexion();
+    $conexion->abrir();
+    $pasajeroDAO = new PasajeroDAO("", "", "", $correo, "", "", "", ""); 
+    $conexion->ejecutar($pasajeroDAO->activar($correo)); 
+    $conexion->cerrar();
+}
+
     public function consultar(){
         $conexion = new Conexion();
         $conexion->abrir();

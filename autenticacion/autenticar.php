@@ -22,7 +22,7 @@ if (isset($_POST["autenticar"])) {
                 if($pasajero-> getEstado()){
                     $_SESSION["id"] = $pasajero->getId();
                     $_SESSION["rol"] = "pasajero";
-                    header("Location: ?pid=" . base64_encode("presentacion/pasajero/sesionPasajero.php"));
+                    header("Location: ?pid=" . base64_encode("presentacion/pasajero/menuPasajero.php"));
                     exit();
                 }else{
                     $error = 2;         

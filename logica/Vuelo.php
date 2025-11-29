@@ -12,13 +12,15 @@ class Vuelo {
     private $fecha_salida;
     private $fecha_llegada;
     private $estado;
+    private $precio;
+
     private $origen;
     private $destino;
     private $modelo;
     private $piloto_principal;
     private $copiloto;
 
-    public function __construct($id_vuelo = 0, $id_ruta = 0, $id_avion = 0, $id_piloto_principal = 0, $id_copiloto = 0, $fecha_salida = "", $fecha_llegada = "", $estado = 1) {
+    public function __construct($id_vuelo = 0, $id_ruta = 0, $id_avion = 0, $id_piloto_principal = 0, $id_copiloto = 0, $fecha_salida = "", $fecha_llegada = "", $estado = 1, $precio = 0.00) {
         $this->id_vuelo = $id_vuelo;
         $this->id_ruta = $id_ruta;
         $this->id_avion = $id_avion;
@@ -27,6 +29,7 @@ class Vuelo {
         $this->fecha_salida = $fecha_salida;
         $this->fecha_llegada = $fecha_llegada;
         $this->estado = $estado;
+        $this->precio = $precio;
     }
 
     // GETTERS
@@ -43,6 +46,7 @@ class Vuelo {
     function getModelo(){ return $this->modelo; }
     function getPiloto_principal(){ return $this->piloto_principal; }
     function getCopiloto(){ return $this->copiloto; }
+    function getPrecio(){ return $this->precio; }
 
     // SETTERS
     function setId_ruta($id_ruta){ $this->id_ruta = $id_ruta; }
@@ -57,13 +61,13 @@ class Vuelo {
     function setModelo($modelo){ $this->modelo = $modelo; }
     function setPiloto_principal($piloto_principal){ $this->piloto_principal = $piloto_principal; }
     function setCopiloto($copiloto){ $this->copiloto = $copiloto; }
-
+    function setPrecio($precio){ $this->precio = $precio; }
 
     // ============= CRUD ============= //
     public function registrar() {
         $conexion = new Conexion();
         $conexion->abrir();
-        $vuelodao = new VueloDAO("", $this->id_ruta, $this->id_avion, $this->id_piloto_principal, $this->id_copiloto, $this->fecha_salida, $this->fecha_llegada, $this->estado);
+        $vuelodao = new VueloDAO("", $this->id_ruta, $this->id_avion, $this->id_piloto_principal, $this->id_copiloto, $this->fecha_salida, $this->fecha_llegada, $this->estado, $this->precio);
         $conexion->ejecutar($vuelodao->registrar());
         $conexion->cerrar();
     }
@@ -84,6 +88,7 @@ class Vuelo {
             $this->fecha_salida = $tupla["fecha_salida"];
             $this->fecha_llegada = $tupla["fecha_llegada"];
             $this->estado = $tupla["estado"];
+            $this->precio = isset($tupla["precio"]) ? $tupla["precio"] : 0;
             $this->origen = $tupla["origen"];
             $this->destino = $tupla["destino"];
             $this->modelo = $tupla["modelo"];
@@ -110,6 +115,7 @@ class Vuelo {
             $vuelo->fecha_salida = $tupla["fecha_salida"];
             $vuelo->fecha_llegada = $tupla["fecha_llegada"];
             $vuelo->estado = $tupla["estado"];
+            $vuelo->precio = isset($tupla["precio"]) ? $tupla["precio"] : 0;
             $vuelo->origen = $tupla["origen"];
             $vuelo->destino = $tupla["destino"];
             $vuelo->modelo = $tupla["modelo"];
@@ -124,7 +130,7 @@ class Vuelo {
     public function editar() {
         $conexion = new Conexion();
         $conexion->abrir();
-        $vuelodao = new VueloDAO($this->id_vuelo, $this->id_ruta, $this->id_avion, $this->id_piloto_principal, $this->id_copiloto, $this->fecha_salida, $this->fecha_llegada, $this->estado);
+        $vuelodao = new VueloDAO($this->id_vuelo, $this->id_ruta, $this->id_avion, $this->id_piloto_principal, $this->id_copiloto, $this->fecha_salida, $this->fecha_llegada, $this->estado, $this->precio);
         $conexion->ejecutar($vuelodao->editar());
         $conexion->cerrar();
     }
@@ -150,7 +156,6 @@ class Vuelo {
                 }
                 $conexion->cerrar();
                 return $resultados;
-                
     }
     
     public function pilotoDisponible($fecha_salida, $fecha_llegada) {
@@ -167,7 +172,6 @@ class Vuelo {
         }
         $conexion->cerrar();
         return $resultados;
-        
     }
     public function consultarProximosVuelos(){
         $conexion = new Conexion();
@@ -184,6 +188,7 @@ class Vuelo {
             $vuelo->fecha_salida = $tupla["fecha_salida"];
             $vuelo->fecha_llegada = $tupla["fecha_llegada"];
             $vuelo->estado = $tupla["estado"];
+            $vuelo->precio = isset($tupla["precio"]) ? $tupla["precio"] : 0;
             $vuelo->origen = $tupla["origen"];
             $vuelo->destino = $tupla["destino"];
             $vuelo->modelo = $tupla["modelo"];

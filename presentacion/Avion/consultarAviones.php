@@ -22,6 +22,7 @@ if(isset($_GET["eliminar"])){
                     Avión eliminado exitosamente.
                 </div>";
 }
+
 ?>
 <body>
 <?php include 'presentacion/administrador/menuAdministrador.php'; ?>
