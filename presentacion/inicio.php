@@ -160,16 +160,16 @@ $listaVuelos = $v->consultarProximosVuelos();
                         <?php if (!isset($_SESSION["id"]) || $_SESSION["rol"] != "pasajero") { ?>
 
                             <a href="?pid=<?= base64_encode('autenticacion/autenticar.php') ?>&redir=<?= $idVuelo ?>"
-                               class="btn btn-danger w-100">
-                               <i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
+                                class="btn btn-danger w-100">
+                                <i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
                             </a>
 
                         <?php } else { ?>
 
                             <!-- SI ESTÁ LOGUEADO COMO PASAJERO -->
                             <a href="?pid=<?= base64_encode('presentacion/Pasajero/comprarTiquete.php') ?>&idVuelo=<?= $idVuelo ?>"
-                               class="btn btn-danger w-100">
-                               <i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
+                                class="btn btn-danger w-100">
+                                <i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
                             </a>
 
                         <?php } ?>

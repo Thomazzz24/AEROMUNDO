@@ -51,7 +51,7 @@ foreach ($lista as $vuelo) {
     echo '
     <div class="col">
         <div class="card h-100 shadow-sm border-0">
-            <img src="../' . $img . '" class="card-img-top" style="height:200px; object-fit:cover;">
+            <img src="' . $img . '" class="card-img-top" style="height:200px; object-fit:cover;">
 
             <div class="card-body">
                 <h5 class="card-title fw-bold text-danger">
