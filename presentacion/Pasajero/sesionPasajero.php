@@ -1,12 +1,12 @@
 <?php
 $id = $_SESSION["id"];
-if ($_SESSION["rol"] != 2) {
-    header('Location: ?pid=' . base64_encode("noAutorizado.php"));
+if (isset($_SESSION["id"]) && isset($_SESSION["rol"]) && $_SESSION["rol"] == "pasajero") {
+    $pasajero = new Pasajero($_SESSION["id"]);
+    $pasajero->consultarPorId();
+} else {
+    header("Location: ?pid=" . base64_encode("autenticacion/noAutorizado.php"));
     exit();
 }
-
-$pasajero = new Pasajero($id);
-$pasajero->consultarPorId();
 ?>
 
 <body>

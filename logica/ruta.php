@@ -96,4 +96,32 @@ require_once(__DIR__ . "/../persistencia/rutaDAO.php");
             $conexion->ejecutar($dao->eliminar());
             $conexion->cerrar();
         }
+
+        public function obtenerRutas(){
+            $conexion = new conexion();
+            $conexion->abrir();
+            $dao = new RutaDAO("", "", "", "");
+            $conexion->ejecutar($dao->obtenerRutas());
+            $lista = [];
+            while ($fila = $conexion->registro()){
+                $lista[] = $fila;
+            }
+            $conexion->cerrar();
+            return $lista;
+        }
+
+        public function rutasMasUsadas() {
+            $conexion = new Conexion();
+            $conexion->abrir();
+            $dao = new rutaDAO("", "", "", "");
+            $conexion->ejecutar($dao->rutasMasUsadas());
+            
+            $resultados = [];
+            while ($tupla = $conexion->registro()) {
+                $resultados[] = [$tupla["ruta"], (int)$tupla["cantidad"]];
+            }
+            
+            $conexion->cerrar();
+            return $resultados;
+        }
     }

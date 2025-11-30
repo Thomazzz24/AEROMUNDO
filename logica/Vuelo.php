@@ -64,10 +64,11 @@ class Vuelo {
     function setPrecio($precio){ $this->precio = $precio; }
 
     // ============= CRUD ============= //
+    // Clase Vuelo.php - Método registrar() (Confirmado como correcto, asumiendo 9 parámetros en VueloDAO)
     public function registrar() {
         $conexion = new Conexion();
         $conexion->abrir();
-        $vuelodao = new VueloDAO("", $this->id_ruta, $this->id_avion, $this->id_piloto_principal, $this->id_copiloto, $this->fecha_salida, $this->fecha_llegada, $this->estado, $this->precio);
+        $vuelodao = new VueloDAO("", $this->id_ruta, $this->id_avion, $this->id_piloto_principal, $this->id_copiloto, $this->fecha_salida, $this->fecha_llegada, $this->estado, $this->precio); // Correcto
         $conexion->ejecutar($vuelodao->registrar());
         $conexion->cerrar();
     }
@@ -200,4 +201,33 @@ class Vuelo {
         $conexion->cerrar();
         return $resultados;
     }
+
+    public function buscarVuelos($origen, $destino, $fecha)
+{
+    $conexion = new Conexion();
+    $conexion->abrir();
+
+    $dao = new VueloDAO();
+    $conexion->ejecutar($dao->buscarVuelos($origen, $destino, $fecha));
+
+    $lista = [];
+
+    while ($tupla = $conexion->registro()) {
+        $vuelo = new Vuelo($tupla["id_vuelo"]);
+        $vuelo->id_ruta = $tupla["id_ruta"];
+        $vuelo->origen = $tupla["origen"];
+        $vuelo->destino = $tupla["destino"];
+        $vuelo->modelo = $tupla["modelo"];
+        $vuelo->fecha_salida = $tupla["fecha_salida"];
+        $vuelo->fecha_llegada = $tupla["fecha_llegada"];
+        $vuelo->precio = $tupla["precio"];
+        $vuelo->piloto_principal = $tupla["piloto_principal"];
+        $vuelo->copiloto = $tupla["copiloto"];
+        $lista[] = $vuelo;
+    }
+
+    $conexion->cerrar();
+    return $lista;
+}
+
 }

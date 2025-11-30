@@ -82,7 +82,23 @@ class PilotoDAO{
     }
     public function eliminarUsuario(){
         return "DELETE FROM p1_usuario WHERE id_usuario = " . $this->id;
-    }  
+    } 
+    
+    public function pilotosMasVuelos() {
+        return "SELECT 
+                    CONCAT(u.nombre, ' ', u.apellido) as piloto,
+                    COUNT(*) as cantidad
+                FROM (
+                    SELECT id_piloto_principal as id_piloto FROM p1_vuelo
+                    UNION ALL
+                    SELECT id_copiloto FROM p1_vuelo WHERE id_copiloto IS NOT NULL
+                ) as vuelos_pilotos
+                INNER JOIN p1_piloto p ON vuelos_pilotos.id_piloto = p.id_piloto
+                INNER JOIN p1_usuario u ON p.id_usuario = u.id_usuario
+                GROUP BY p.id_piloto, u.nombre, u.apellido
+                ORDER BY cantidad DESC
+                LIMIT 10";
+    }
 
     
 }

@@ -41,4 +41,22 @@ class RutaDAO {
         return "DELETE FROM p1_ruta
                 WHERE id_ruta = {$this->id}";
     }
+
+    public function obtenerRutas() {
+        return "SELECT DISTINCT origen, destino
+                FROM p1_ruta
+                ORDER BY origen ASC, destino ASC
+        ";
+    }
+
+    public function rutasMasUsadas() {
+        return "SELECT 
+                    CONCAT(r.origen, ' → ', r.destino) as ruta,
+                    COUNT(*) as cantidad
+                FROM p1_vuelo v
+                INNER JOIN p1_ruta r ON v.id_ruta = r.id_ruta
+                GROUP BY r.id_ruta, r.origen, r.destino
+                ORDER BY cantidad DESC
+                LIMIT 10";
+    }
 }

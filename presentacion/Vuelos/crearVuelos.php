@@ -16,8 +16,9 @@ if (isset($_POST["crearVuelo"])) {
     $pilotoId = $_POST["piloto_principal"];
     $copilotoId = $_POST["copiloto"];
     $fechallegada = $_POST["fecha_llegada"];
+    $precio = $_POST["precio"];
 
-    if (empty($rutaId) || empty($avionId) || empty($pilotoId) || empty($copilotoId) || empty($fechallegada)) {
+    if (empty($rutaId) || empty($avionId) || empty($pilotoId) || empty($copilotoId) || empty($fechallegada) || empty($precio)) {
         $mensaje = "<div class='alert alert-danger'>Error: Todos los campos son obligatorios.</div>";
     } else {
         $rutaObj = new Ruta($rutaId);
@@ -32,6 +33,7 @@ if (isset($_POST["crearVuelo"])) {
                 $vuelo->setId_copiloto($copilotoId);
                 $vuelo->setFecha_salida($fechaSalida);
                 $vuelo->setFecha_llegada($fechallegada);
+                $vuelo->setPrecio($precio);
                 $vuelo->setEstado(1);
                 
                 $vuelo->registrar();
@@ -110,6 +112,10 @@ if (isset($_POST["crearVuelo"])) {
                                 <select class="form-select" name="copiloto" id="copiloto" required>
                                     <option value="">Primero seleccione un piloto principal</option>
                                 </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="precio" class="form-label">Precio Base del Tiquete</label>
+                                <input type="number" step="0.01" min="0" class="form-control" name="precio" id="precio" required>
                             </div>
 
                             <button type="submit" name="crearVuelo" class="btn btn-primary" id="btnSubmit">Crear Vuelo</button>

@@ -95,5 +95,20 @@ class Avion {
         $conexion->cerrar();
     }
 
+    public function avionesMasUsados() {
+    $conexion = new Conexion();
+    $conexion->abrir();
+    $dao = new AvionDAO("", "", "", "");
+    $conexion->ejecutar($dao->avionesMasUsados());
+    
+    $resultados = [];
+    while ($tupla = $conexion->registro()) {
+        $resultados[] = [$tupla["avion"], (int)$tupla["cantidad"]];
+    }
+    
+    $conexion->cerrar();
+    return $resultados;
+}
+
     
 }

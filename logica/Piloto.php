@@ -109,4 +109,19 @@ class Piloto extends Persona{
         $conexion->cerrar();
     }
 
+    public function pilotosMasVuelos() {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $dao = new PilotoDAO("", "", "", "", "", "", "", "");
+        $conexion->ejecutar($dao->pilotosMasVuelos());
+        
+        $resultados = [];
+        while ($tupla = $conexion->registro()) {
+            $resultados[] = [$tupla["piloto"], (int)$tupla["cantidad"]];
+        }
+        
+        $conexion->cerrar();
+        return $resultados;
+    }
+
 }

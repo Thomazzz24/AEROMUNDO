@@ -48,5 +48,16 @@ class AvionDAO {
                 WHERE id_avion = {$this->id}";
     }
 
+    public function avionesMasUsados() {
+    return "SELECT 
+                a.modelo as avion,
+                COUNT(*) as cantidad
+            FROM p1_vuelo v
+            INNER JOIN p1_avion a ON v.id_avion = a.id_avion
+            GROUP BY a.id_avion, a.modelo
+            ORDER BY cantidad DESC
+            LIMIT 10";
+}
+
     
 }

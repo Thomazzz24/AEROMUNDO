@@ -105,21 +105,18 @@ class PasajeroDAO{
     }
 
     public function consultarTodos(){
-        return "
-            SELECT 
-                u.id_usuario AS id,
-                u.nombre,
-                u.apellido,
-                u.correo,
-                u.id_rol AS rol,
-                u.estado,
-                u.fecha_registro AS fecharegistro,
-                p.id_pasajero
+    return "SELECT u.id_usuario AS id,
+                   u.nombre,
+                   u.apellido,
+                   u.correo,
+                   u.id_rol AS rol,
+                   u.estado,
+                   u.fecha_registro AS fecharegistro,
+                   p.id_pasajero
             FROM p1_usuario u
             INNER JOIN p1_pasajero p ON p.id_usuario = u.id_usuario
-            WHERE u.id_rol = 3
-        ";
-    }
+            WHERE u.id_rol = 3"; 
+}
 
     public function cambiarEstado($estado){
         return "

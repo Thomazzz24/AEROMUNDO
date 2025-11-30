@@ -21,7 +21,7 @@ include 'presentacion/administrador/menuAdministrador.php';
                     <i class="fa-solid fa-user-tie fa-2x mb-2 text-danger"></i>
                     <h5 class="card-title">Pilotos</h5>
                     <a href="?pid=<?php echo base64_encode('presentacion/Piloto/consultarPiloto.php'); ?>" 
-                       class="btn btn-danger btn-sm mt-2">Ver más</a>
+                        class="btn btn-danger btn-sm mt-2">Ver más</a>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@ include 'presentacion/administrador/menuAdministrador.php';
                     <i class="fa-solid fa-users fa-2x mb-2 text-danger"></i>
                     <h5 class="card-title">Clientes</h5>
                     <a href="?pid=<?php echo base64_encode('presentacion/Pasajero/consultarPasajero.php'); ?>" 
-                       class="btn btn-danger btn-sm mt-2">Ver más</a>
+                        class="btn btn-danger btn-sm mt-2">Ver más</a>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@ include 'presentacion/administrador/menuAdministrador.php';
                     <i class="fa-solid fa-plane fa-2x mb-2 text-danger"></i>
                     <h5 class="card-title">Aviones</h5>
                     <a href="?pid=<?php echo base64_encode('presentacion/Avion/consultarAviones.php'); ?>" 
-                       class="btn btn-danger btn-sm mt-2">Ver más</a>
+                        class="btn btn-danger btn-sm mt-2">Ver más</a>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@ include 'presentacion/administrador/menuAdministrador.php';
                     <i class="fa-solid fa-route fa-2x mb-2 text-danger"></i>
                     <h5 class="card-title">Rutas</h5>
                     <a href="?pid=<?php echo base64_encode('presentacion/Ruta/consultarRutas.php'); ?>" 
-                       class="btn btn-danger btn-sm mt-2">Ver más</a>
+                        class="btn btn-danger btn-sm mt-2">Ver más</a>
                 </div>
             </div>
         </div>

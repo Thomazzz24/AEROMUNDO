@@ -121,6 +121,33 @@
                     </ul>
                 </li>
 
+                <!-- ESTADISTICAS -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                        <i class="fa-solid fa-chart-line me-1"></i> Estadísticas
+                    </a>
+                    <ul class="dropdown-menu shadow-sm">
+                        <li>
+                            <a class="dropdown-item"
+                            href="?pid=<?php echo base64_encode('presentacion/estadisticas/avionesUsados.php'); ?>">
+                            <i class="fa-solid fa-plane me-2"></i> Aviones Más Usados
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                            href="?pid=<?php echo base64_encode('presentacion/estadisticas/pilotosVuelos.php'); ?>">
+                            <i class="fa-solid fa-user-tie me-2"></i> Pilotos con Más Vuelos
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                            href="?pid=<?php echo base64_encode('presentacion/estadisticas/rutasUsadas.php'); ?>">
+                            <i class="fa-solid fa-route me-2"></i> Rutas Más Utilizadas
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
             </ul>
 
             <!-- USUARIO -->
