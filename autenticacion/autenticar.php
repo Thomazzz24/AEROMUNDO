@@ -39,7 +39,7 @@ if (isset($_POST["autenticar"])) {
                 exit();
             }
 
-            header("Location: ?pid=" . base64_encode("presentacion/pasajero/menuPasajero.php"));
+            header("Location: ?pid=" . base64_encode("presentacion/Pasajero/menuPasajero.php"));
             exit();
 
         } else {
@@ -51,7 +51,7 @@ if (isset($_POST["autenticar"])) {
     if ($piloto->autenticar()) {
         $_SESSION["id"] = $piloto->getId();
         $_SESSION["rol"] = "piloto";
-        header("Location: ?pid=" . base64_encode("presentacion/piloto/sesionPiloto.php"));
+        header("Location: ?pid=" . base64_encode("presentacion/Piloto/sesionPiloto.php"));
         exit();
     }
 
