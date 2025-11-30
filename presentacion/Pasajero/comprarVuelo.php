@@ -118,7 +118,7 @@ include "presentacion/Pasajero/menuPasajero.php";
         console.log("🔄 Cargando orígenes...");
         
         $.ajax({
-            url: "ajax/obtenerOrigenes.php",
+            url: "Ajax/obtenerOrigenes.php",
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -150,7 +150,7 @@ include "presentacion/Pasajero/menuPasajero.php";
         console.log("🔄 Cargando destinos para origen:", origenSeleccionado || "todos");
         
         $.ajax({
-            url: "ajax/obtenerDestinos.php",
+            url: "Ajax/obtenerDestinos.php",
             method: "GET",
             data: { origen: origenSeleccionado },
             dataType: "json",
@@ -200,7 +200,7 @@ include "presentacion/Pasajero/menuPasajero.php";
 
         // Realizar búsqueda
         $.ajax({
-            url: "ajax/buscarVuelos.php",
+            url: "Ajax/buscarVuelos.php",
             method: "GET",
             data: { origen, destino, fecha },
             success: function (html) {

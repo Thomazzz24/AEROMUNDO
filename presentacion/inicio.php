@@ -201,7 +201,7 @@ $(document).ready(function () {
 
     function cargarOrigenes() {
         $.ajax({
-            url: "ajax/obtenerOrigenes.php",
+            url: "Ajax/obtenerOrigenes.php",
             method: "GET",
             dataType: "json",
             success: function (data) {
@@ -215,7 +215,7 @@ $(document).ready(function () {
 
     function cargarDestinos() {
         $.ajax({
-            url: "ajax/obtenerDestinos.php",
+            url: "Ajax/obtenerDestinos.php",
             method: "GET",
             data: { origen: $("#origen").val() },
             dataType: "json",
@@ -230,7 +230,7 @@ $(document).ready(function () {
 
     function buscarVuelos() {
         $.ajax({
-            url: "ajax/buscarVuelos.php",
+            url: "Ajax/buscarVuelos.php",
             method: "GET",
             data: { 
                 origen: $("#origen").val(),
