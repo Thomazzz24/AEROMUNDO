@@ -39,7 +39,7 @@ include_once("presentacion/Pasajero/menuPasajero.php");
                 <!-- BUSCAR VUELOS -->
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="?pid=<?php echo base64_encode('presentacion/pasajero/comprarVuelo.php'); ?>">
+                        href="?pid=<?php echo base64_encode('presentacion/Pasajero/comprarVuelo.php'); ?>">
                         <i class="fa-solid fa-plane-departure me-1"></i> Buscar Vuelos
                     </a>
                 </li>
