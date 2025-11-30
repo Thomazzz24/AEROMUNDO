@@ -22,15 +22,15 @@ if (!$lista || count($lista) == 0) {
 foreach ($lista as $vuelo) {
 
     $imagenes = [
-        "Cartagena" => "/AEROMUNDO/img/cartagena2.jpg",
-        "Madrid" => "/AEROMUNDO/img/madrid.webp",
-        "Medellín" => "/AEROMUNDO/img/medellin.jpg",
-        "Cali" => "/AEROMUNDO/img/cali.jpg",
-        "Santa Marta" => "/AEROMUNDO/img/santaMarta.jpg",
-        "Pereira" => "/AEROMUNDO/img/pereira.jpg",
-        "Bogota" => "/AEROMUNDO/img/bogota.jpg"
+        "Cartagena" => "AEROMUNDO/img/cartagena2.jpg",
+        "Madrid" => "AEROMUNDO/img/madrid.webp",
+        "Medellín" => "AEROMUNDO/img/medellin.jpg",
+        "Cali" => "AEROMUNDO/img/cali.jpg",
+        "Santa Marta" => "AEROMUNDO/img/santaMarta.jpg",
+        "Pereira" => "AEROMUNDO/img/pereira.jpg",
+        "Bogota" => "AEROMUNDO/img/bogota.jpg"
     ];
-    $img = $imagenes[$vuelo->getDestino()] ?? "/AEROMUNDO/img/default.jpg";
+    $img = $imagenes[$vuelo->getDestino()] ?? "AEROMUNDO/img/default.jpg";
 
     $salida = date("d/m/Y H:i", strtotime($vuelo->getFecha_salida()));
     $llegada = date("d/m/Y H:i", strtotime($vuelo->getFecha_llegada()));
