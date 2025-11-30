@@ -8,7 +8,9 @@ if (isset($_SESSION["id"]) && $_SESSION["rol"] == "pasajero") {
 
 ?>
 
-
+<?php
+include_once("presentacion/Pasajero/menuPasajero.php");
+?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm py-3">
     <div class="container-fluid">
 

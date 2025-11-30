@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 require_once("logica/Vuelo.php");
-require_once("logica/Tiquete.php");
+require_once("logica/tiquete.php");
 require_once("logica/Pasajero.php");
 
 // Validar que haya sesión activa
