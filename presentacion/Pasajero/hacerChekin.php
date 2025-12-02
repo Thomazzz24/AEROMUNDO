@@ -3,7 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once("logica/Tiquete.php");
+require_once("logica/tiquete.php");
 require_once("logica/Vuelo.php");
 require_once("logica/Checkin.php");
 

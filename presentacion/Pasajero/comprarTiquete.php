@@ -13,7 +13,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["rol"])) {
     exit();
 }
 
-include "presentacion/Pasajero/menuPasajero.php"; 
+include "presentacion/pasajero/menuPasajero.php"; 
 
 // Obtener ID del vuelo
 $idVuelo = $_GET["idVuelo"] ?? 0;
@@ -38,7 +38,7 @@ if (!$vuelo->consultarPorId()) {
 if (strtotime($vuelo->getFecha_salida()) < time()) {
     echo "<div class='container mt-5'>
             <div class='alert alert-warning'>Este vuelo ya partió. No es posible comprarlo.</div>
-            <a href='?pid=" . base64_encode('presentacion/Pasajero/consultarVuelos.php') . "' class='btn btn-primary'>Ver otros vuelos</a>
+            <a href='?pid=" . base64_encode('presentacion/pasajero/consultarVuelos.php') . "' class='btn btn-primary'>Ver otros vuelos</a>
           </div>";
     exit();
 }
@@ -244,7 +244,7 @@ $disponibilidad = $tiquete->validarDisponibilidad($idVuelo, 1);
                         </tfoot>
                     </table>
                     <div class="text-center mt-3">
-                        <a href="?pid=<?= base64_encode('presentacion/Pasajero/misTiquetes.php') ?>" 
+                        <a href="?pid=<?= base64_encode('presentacion/pasajero/misTiquetes.php') ?>" 
                            class="btn btn-primary">
                             <i class="fa-solid fa-ticket me-2"></i>
                             Ver Mis Tiquetes
