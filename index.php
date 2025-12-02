@@ -37,7 +37,7 @@ if (! isset($_GET["pid"])) {
 } else {
     $pid = base64_decode($_GET["pid"]);
     if (isset($_SESSION["id"])) {
-        include ($pid);
+include __DIR__ . '/' . $pid;
     } else {
         include ($pid);
         // TODO reparar esto
