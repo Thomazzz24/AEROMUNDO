@@ -131,7 +131,11 @@ $tiquetes = $tiquete->consultarPorPasajero($pasajero->getId());
 
     <?php elseif ($puedeCheckin): ?>
 
+<<<<<<< HEAD
         <a href="?pid=<?= base64_encode('presentacion/pasajero/hacerChekin.php') ?>&id_tiquete=<?= $t->getId_tiquete() ?>"
+=======
+        <a href="?pid=<?= base64_encode('presentacion/pasajero/hacerCheckin.php') ?>&id_tiquete=<?= $t->getId_tiquete() ?>"
+>>>>>>> origin/main
             class="btn btn-primary btn-sm">
             <i class="fa-solid fa-check me-1"></i>
             Hacer Check-In
