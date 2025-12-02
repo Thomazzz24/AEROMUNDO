@@ -31,7 +31,7 @@ include_once("presentacion/Pasajero/menuPasajero.php");
                 <!-- INICIO -->
                 <li class="nav-item">
                     <a class="nav-link active"
-                        href="?pid=<?php echo base64_encode('presentacion/pasajero/sesionPasajero.php'); ?>">
+                        href="?pid=<?php echo base64_encode('presentacion/Pasajero/sesionPasajero.php'); ?>">
                         <i class="fa-solid fa-house me-1"></i> Inicio
                     </a>
                 </li>
@@ -39,7 +39,7 @@ include_once("presentacion/Pasajero/menuPasajero.php");
                 <!-- BUSCAR VUELOS -->
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="?pid=<?php echo base64_encode('presentacion/pasajero/comprarVuelo.php'); ?>">
+                        href="?pid=<?php echo base64_encode('presentacion/Pasajero/comprarVuelo.php'); ?>">
                         <i class="fa-solid fa-plane-departure me-1"></i> Buscar Vuelos
                     </a>
                 </li>
@@ -47,7 +47,7 @@ include_once("presentacion/Pasajero/menuPasajero.php");
                 <!-- MIS TIQUETES -->
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="?pid=<?php echo base64_encode('presentacion/pasajero/misTiquetes.php'); ?>">
+                        href="?pid=<?php echo base64_encode('presentacion/Pasajero/misTiquetes.php'); ?>">
                         <i class="fa-solid fa-ticket me-1"></i> Mis Tiquetes
                     </a>
                 </li>
