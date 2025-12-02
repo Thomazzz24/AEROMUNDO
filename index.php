@@ -32,16 +32,37 @@ if (isset($_GET["salir"])) {
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 </head>
 <?php
-if (! isset($_GET["pid"])) {
-    include ("presentacion/inicio.php");
+if (!isset($_GET["pid"])) {
+
+    include(__DIR__ . "/presentacion/inicio.php");
+
 } else {
+
     $pid = base64_decode($_GET["pid"]);
+    $ruta = __DIR__ . "/" . $pid;
+
     if (isset($_SESSION["id"])) {
-include __DIR__ . '/' . $pid;
+
+        if (file_exists($ruta)) {
+            include($ruta);
+        } else {
+            echo "<div class='alert alert-danger text-center'>
+                    Error: No se encontró el archivo <b>$ruta</b>.
+                  </div>";
+        }
+
     } else {
-        include ($pid);
-        // TODO reparar esto
+
+        if (file_exists($ruta)) {
+            include($ruta);
+        } else {
+            echo "<div class='alert alert-danger text-center'>
+                    Error: No se encontró el archivo <b>$ruta</b>.
+                  </div>";
+        }
+
     }
 }
 ?>
+
 </html>
