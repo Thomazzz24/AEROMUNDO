@@ -14,7 +14,7 @@ if (!isset($_SESSION["id"]) || $_SESSION["rol"] != "pasajero") {
     exit();
 }
 
-include "presentacion/pasajero/menuPasajero.php";
+include "presentacion/Pasajero/menuPasajero.php";
 
 // Consultar datos del pasajero
 $pasajero = new Pasajero($_SESSION["id"]);
@@ -44,7 +44,7 @@ $tiquetes = $tiquete->consultarPorPasajero($pasajero->getId());
                 </div>
 
                 <div class="text-center mt-4">
-                    <a href="?pid=<?= base64_encode('presentacion/pasajero/comprarVuelo.php') ?>" 
+                    <a href="?pid=<?= base64_encode('presentacion/Pasajero/comprarVuelo.php') ?>" 
                         class="btn btn-primary">
                         <i class="fa-solid fa-plane-up me-2"></i> Buscar vuelos
                     </a>
@@ -122,7 +122,7 @@ $tiquetes = $tiquete->consultarPorPasajero($pasajero->getId());
 
   <?php if ($yaCheckin): ?>
     <!-- ✅ Acceso directo al archivo -->
-    <a href="presentacion/pasajero/generarPasabordo.php?id_tiquete=<?= $t->getId_tiquete() ?>" 
+    <a href="presentacion/Pasajero/generarPasabordo.php?id_tiquete=<?= $t->getId_tiquete() ?>" 
         target="_blank" 
         class="btn btn-success btn-sm">
         <i class="fa-solid fa-file-pdf me-1"></i>

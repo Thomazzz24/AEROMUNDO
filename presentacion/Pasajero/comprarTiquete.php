@@ -13,7 +13,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["rol"])) {
     exit();
 }
 
-include "presentacion/pasajero/menuPasajero.php"; 
+include "presentacion/Pasajero/menuPasajero.php"; 
 
 // Obtener ID del vuelo
 $idVuelo = $_GET["idVuelo"] ?? 0;
