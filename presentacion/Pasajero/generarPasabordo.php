@@ -11,7 +11,7 @@ if (!isset($_SESSION["id"]) || $_SESSION["rol"] != "pasajero") {
 }
 chdir(__DIR__ . '/../../');
 
-require_once('logica/Tiquete.php');
+require_once('logica/tiquete.php');
 require_once('logica/Vuelo.php');
 require_once('fpdf/fpdf.php');
 
