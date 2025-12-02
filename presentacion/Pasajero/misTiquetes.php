@@ -44,7 +44,7 @@ $tiquetes = $tiquete->consultarPorPasajero($pasajero->getId());
                 </div>
 
                 <div class="text-center mt-4">
-                    <a href="?pid=<?= base64_encode('presentacion/Pasajero/comprarVuelo.php') ?>" 
+                    <a href="?pid=<?= base64_encode('presentacion/pasajero/comprarVuelo.php') ?>" 
                         class="btn btn-primary">
                         <i class="fa-solid fa-plane-up me-2"></i> Buscar vuelos
                     </a>
@@ -131,7 +131,7 @@ $tiquetes = $tiquete->consultarPorPasajero($pasajero->getId());
 
     <?php elseif ($puedeCheckin): ?>
 
-        <a href="?pid=<?= base64_encode('presentacion/Pasajero/hacerCheckin.php') ?>&id_tiquete=<?= $t->getId_tiquete() ?>"
+        <a href="?pid=<?= base64_encode('presentacion/pasajero/hacerCheckin.php') ?>&id_tiquete=<?= $t->getId_tiquete() ?>"
             class="btn btn-primary btn-sm">
             <i class="fa-solid fa-check me-1"></i>
             Hacer Check-In
