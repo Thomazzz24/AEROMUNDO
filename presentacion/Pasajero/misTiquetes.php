@@ -14,7 +14,7 @@ if (!isset($_SESSION["id"]) || $_SESSION["rol"] != "pasajero") {
     exit();
 }
 
-include "presentacion/Pasajero/menuPasajero.php";
+include "presentacion/pasajero/menuPasajero.php";
 
 // Consultar datos del pasajero
 $pasajero = new Pasajero($_SESSION["id"]);
@@ -133,11 +133,11 @@ $tiquetes = $tiquete->consultarPorPasajero($pasajero->getId());
         
     <!--ni -->
 
-        <a href="?pid=<?= base64_encode('presentacion/pasajero/hacerChekin.php') ?>&id_tiquete=<?= $t->getId_tiquete() ?>"
-            class="btn btn-primary btn-sm">
-            <i class="fa-solid fa-check me-1"></i>
-            Hacer Check-In
-        </a>
+   <a href="?pid=<?= base64_encode('presentacion/Pasajero/hacerChekin.php') ?>&id_tiquete=<?= $t->getId_tiquete() ?>"
+    class="btn btn-primary btn-sm">
+    <i class="fa-solid fa-check me-1"></i>
+    Hacer Check-In
+</a>
 
     <?php else: ?>
         <button class="btn btn-secondary btn-sm" disabled>
