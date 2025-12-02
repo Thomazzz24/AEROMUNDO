@@ -11,7 +11,7 @@ $listaVuelos = $v->consultarProximosVuelos();
 ?>
 
 <?php
-include "presentacion/pasajero/menuPasajero.php";
+include "presentacion/Pasajero/menuPasajero.php";
 ?>
 
 <body class="bg-light">
@@ -96,7 +96,7 @@ include "presentacion/pasajero/menuPasajero.php";
                                <i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
                             </a>
                         <?php } else { ?>
-                            <a href="?pid=<?= base64_encode('presentacion/pasajero/comprarTiquete.php') ?>&idVuelo=<?= $idVuelo ?>"
+                            <a href="?pid=<?= base64_encode('presentacion/Pasajero/comprarTiquete.php') ?>&idVuelo=<?= $idVuelo ?>"
                                class="btn btn-danger w-100">
                                <i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
                             </a>
