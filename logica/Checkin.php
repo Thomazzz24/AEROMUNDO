@@ -23,7 +23,7 @@ class Checkin {
         $conexion->abrir();
 
         $dao = new CheckinDAO(
-            0,
+            $this->id_checkin,
             $this->id_tiquete,
             $this->fecha_checkin
         );

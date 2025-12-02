@@ -109,4 +109,11 @@ class TiqueteDAO {
                 WHERE id_vuelo = $id_vuelo
                 AND documento = '$documento'";
     }
+  public function hacerCheckin() {
+    return "UPDATE p1_tiquete
+            SET estado_checkin = 1
+            WHERE id_tiquete = {$this->id_tiquete}";
+}
+
+
 }

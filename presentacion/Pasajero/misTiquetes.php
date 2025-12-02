@@ -3,10 +3,12 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once("logica/tiquete.php");
+require_once("logica/Tiquete.php");
 require_once("logica/Pasajero.php");
 require_once("logica/Vuelo.php");
+require_once("logica/Checkin.php");
 
+// Validación de sesión
 if (!isset($_SESSION["id"]) || $_SESSION["rol"] != "pasajero") {
     header("Location: ?pid=" . base64_encode("autenticacion/autenticar.php"));
     exit();
@@ -14,9 +16,11 @@ if (!isset($_SESSION["id"]) || $_SESSION["rol"] != "pasajero") {
 
 include "presentacion/Pasajero/menuPasajero.php";
 
+// Consultar datos del pasajero
 $pasajero = new Pasajero($_SESSION["id"]);
 $pasajero->consultarPorId();
 
+// Consultar los tiquetes del pasajero
 $tiquete = new Tiquete();
 $tiquetes = $tiquete->consultarPorPasajero($pasajero->getId());
 ?>
@@ -32,7 +36,7 @@ $tiquetes = $tiquete->consultarPorPasajero($pasajero->getId());
         </div>
         <div class="card-body">
 
-            <?php if (count($tiquetes) == 0) { ?>
+            <?php if (!$tiquetes || count($tiquetes) == 0) { ?>
                 
                 <div class="alert alert-info text-center">
                     <i class="fa-solid fa-circle-info me-2"></i>
@@ -70,12 +74,11 @@ $tiquetes = $tiquete->consultarPorPasajero($pasajero->getId());
 
                             foreach ($tiquetes as $t):
 
-                                // Obtener información del vuelo
+                                // Consultar el vuelo
                                 $vuelo = new Vuelo($t->getId_vuelo());
                                 $vuelo->consultarPorId();
 
-                                // Verificar si ya tiene check-in
-                                require_once("logica/Checkin.php");
+                                // Consultar si ya hizo check-in
                                 $checkin = new Checkin();
                                 $yaCheckin = $checkin->consultarPorTiquete($t->getId_tiquete());
                             ?>
@@ -85,6 +88,7 @@ $tiquetes = $tiquete->consultarPorPasajero($pasajero->getId());
                                 <td class="text-center">#<?= $t->getId_vuelo() ?></td>
 
                                 <td class="text-center"><?= $vuelo->getOrigen() ?></td>
+
                                 <td class="text-center"><?= $vuelo->getDestino() ?></td>
 
                                 <td class="text-center">
@@ -105,44 +109,42 @@ $tiquetes = $tiquete->consultarPorPasajero($pasajero->getId());
                                     <?php endif; ?>
                                 </td>
 
-                                <td class="text-center">
+                             <td class="text-center">
 
-                                    <?php
-                                    // Calcular si está dentro de las 24 horas
-                                    $ahora = time();
-                                    $salida = strtotime($vuelo->getFecha_salida());
-                                    $falta = $salida - $ahora;
+    <?php
+    // Validación de 24 horas
+    $ahora = time();
+    $salida = strtotime($vuelo->getFecha_salida());
+    $falta = $salida - $ahora;
 
-                                    $puedeCheckin = ($falta <= 24 * 3600 && $falta > 0);
-                                    ?>
+    $puedeCheckin = ($falta <= 24 * 3600 && $falta > 0);
+    ?>
 
-                                    <?php if ($yaCheckin): ?>
+  <?php if ($yaCheckin): ?>
+    <!-- ✅ Acceso directo al archivo -->
+    <a href="presentacion/pasajero/generarPasabordo.php?id_tiquete=<?= $t->getId_tiquete() ?>" 
+        target="_blank" 
+        class="btn btn-success btn-sm">
+        <i class="fa-solid fa-file-pdf me-1"></i>
+        Ver Pasabordo
+    </a>
 
-                                        <a href="pasabordos/pasabordo_<?= $t->getId_tiquete() ?>.pdf" 
-                                            target="_blank" 
-                                            class="btn btn-success btn-sm">
-                                            <i class="fa-solid fa-file-pdf me-1"></i>
-                                            Ver Pasabordo
-                                        </a>
+    <?php elseif ($puedeCheckin): ?>
 
-                                    <?php elseif ($puedeCheckin): ?>
+        <a href="?pid=<?= base64_encode('presentacion/Pasajero/hacerCheckin.php') ?>&id_tiquete=<?= $t->getId_tiquete() ?>"
+            class="btn btn-primary btn-sm">
+            <i class="fa-solid fa-check me-1"></i>
+            Hacer Check-In
+        </a>
 
-                                        <a href="?pid=<?= base64_encode('presentacion/Pasajero/checkin.php') ?>&id_tiquete=<?= $t->getId_tiquete() ?>"
-                                            class="btn btn-primary btn-sm">
-                                            <i class="fa-solid fa-check me-1"></i>
-                                            Hacer Check-In
-                                        </a>
+    <?php else: ?>
+        <button class="btn btn-secondary btn-sm" disabled>
+            <i class="fa-solid fa-clock me-1"></i>
+            Aún no disponible
+        </button>
+    <?php endif; ?>
 
-                                    <?php else: ?>
-
-                                        <button class="btn btn-secondary btn-sm" disabled>
-                                            <i class="fa-solid fa-clock me-1"></i>
-                                            Aún no disponible
-                                        </button>
-
-                                    <?php endif; ?>
-
-                                </td>
+</td>
                             </tr>
 
                             <?php endforeach; ?>

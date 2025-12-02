@@ -1,7 +1,9 @@
 <?php
-require_once("persistencia/TiqueteDAO.php");
-require_once("persistencia/Conexion.php");
-
+if (!defined('BASE_PATH')) {
+    define('BASE_PATH', __DIR__ . '/../');
+}
+require_once(BASE_PATH . "persistencia/TiqueteDAO.php");
+require_once(BASE_PATH . "persistencia/Conexion.php");
 class Tiquete {
 
     private $id_tiquete;
@@ -13,6 +15,8 @@ class Tiquete {
     private $asiento;
     private $precio;
     private $fecha_compra;
+    private $estado_checkin;
+
 
     public function __construct(
         $id_tiquete = 0,
@@ -23,7 +27,9 @@ class Tiquete {
         $documento = "",
         $asiento = "",
         $precio = 0,
-        $fecha_compra = ""
+        $fecha_compra = "",
+            $estado_checkin = 0
+
     ){
         $this->id_tiquete = $id_tiquete;
         $this->id_comprador = $id_comprador;
@@ -34,6 +40,8 @@ class Tiquete {
         $this->asiento = $asiento;
         $this->precio = $precio;
         $this->fecha_compra = $fecha_compra;
+            $this->estado_checkin = $estado_checkin;
+
     }
 
     // Getters
@@ -46,6 +54,8 @@ class Tiquete {
     public function getAsiento() { return $this->asiento; }
     public function getPrecio() { return $this->precio; }
     public function getFecha_compra() { return $this->fecha_compra; }
+    public function getEstadoCheckin() { return $this->estado_checkin; }
+
 
     // Insertar tiquete
     public function insertar() {
@@ -189,4 +199,40 @@ class Tiquete {
         $conexion->cerrar();
         return $tiquetes;
     }
+public function hacerCheckin() {
+    $conexion = new Conexion();
+    $conexion->abrir();
+
+    $dao = new TiqueteDAO($this->id_tiquete);
+    $conexion->ejecutar($dao->hacerCheckin());
+
+    $conexion->cerrar();
+}
+public function consultarPorId() {
+    $conexion = new Conexion();
+    $conexion->abrir();
+
+    $dao = new TiqueteDAO($this->id_tiquete);
+    $conexion->ejecutar($dao->consultarPorId());
+
+    if ($tupla = $conexion->registro()) {
+        $this->id_comprador    = $tupla['id_comprador'];
+        $this->id_vuelo        = $tupla['id_vuelo'];
+        $this->id_pasajero     = $tupla['id_pasajero'];
+        $this->nombre_pasajero = $tupla['nombre_pasajero'];
+        $this->documento       = $tupla['documento'];
+        $this->asiento         = $tupla['asiento'];
+        $this->precio          = $tupla['precio'];
+        $this->fecha_compra    = $tupla['fecha_compra'];
+        $this->estado_checkin  = $tupla['estado_checkin'];
+
+        $conexion->cerrar();
+        return true;
+    }
+
+    $conexion->cerrar();
+    return false;
+}
+
+
 }

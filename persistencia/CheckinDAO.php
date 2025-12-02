@@ -16,18 +16,14 @@ class CheckinDAO {
     }
 
     public function insertar() {
-        return "
-            INSERT INTO p1_checkin (id_tiquete, fecha_checkin)
-            VALUES ('$this->id_tiquete', '$this->fecha_checkin')
-        ";
+        return "INSERT INTO p1_checkin (id_tiquete, fecha_checkin)
+                VALUES ('{$this->id_tiquete}', '{$this->fecha_checkin}')";
     }
 
     public function consultarPorTiquete($id_tiquete) {
-        return "
-            SELECT *
-            FROM p1_checkin
-            WHERE id_tiquete = $id_tiquete
-            LIMIT 1
-        ";
+        return "SELECT *
+                FROM p1_checkin
+                WHERE id_tiquete = $id_tiquete
+                LIMIT 1";
     }
 }
