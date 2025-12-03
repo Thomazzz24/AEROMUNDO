@@ -1,6 +1,9 @@
 <?php
 
 ob_start();
+echo "<pre>";
+var_dump($_SESSION);
+echo "</pre>";
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
