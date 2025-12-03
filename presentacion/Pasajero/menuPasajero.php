@@ -31,7 +31,7 @@ include_once("presentacion/Pasajero/menuPasajero.php");
                 <!-- INICIO -->
                 <li class="nav-item">
                     <a class="nav-link active"
-                        href="?pid=<?php echo base64_encode('presentacion/Pasajero/sesionPasajero.php'); ?>">
+                        href="?pid=<?php echo base64_encode('presentacion/inicio.php'); ?>">
                         <i class="fa-solid fa-house me-1"></i> Inicio
                     </a>
                 </li>

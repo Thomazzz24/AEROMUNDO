@@ -18,7 +18,7 @@
                 <!-- INICIO -->
                 <li class="nav-item">
                     <a class="nav-link active"
-                        href="?pid=<?php echo base64_encode('presentacion/administrador/sesionAdmin.php'); ?>">
+                        href="?pid=<?php echo base64_encode('presentacion/inicio.php'); ?>">
                         <i class="fa-solid fa-house me-1"></i> Inicio
                     </a>
                 </li>
@@ -31,16 +31,12 @@
                     </a>
                     <ul class="dropdown-menu shadow-sm">
                         <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/Piloto/crearPiloto.php'); ?>">
-                               Registrar Pilotos</a>
+                                href="?pid=<?php echo base64_encode('presentacion/Piloto/crearPiloto.php'); ?>">
+                                Registrar Pilotos</a>
                         </li>
                         <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/Piloto/consultarPiloto.php'); ?>">
-                               Consultar Pilotos</a>
-                        </li>
-                        <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/Piloto/buscarPiloto.php'); ?>">
-                               Buscar Pilotos</a>
+                                href="?pid=<?php echo base64_encode('presentacion/Piloto/consultarPiloto.php'); ?>">
+                                Consultar Pilotos</a>
                         </li>
                     </ul>
                 </li>
@@ -65,16 +61,12 @@
                     </a>
                     <ul class="dropdown-menu shadow-sm">
                         <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/Avion/crearAvion.php'); ?>">
-                               Registrar Aviones</a>
+                                href="?pid=<?php echo base64_encode('presentacion/Avion/crearAvion.php'); ?>">
+                                Registrar Aviones</a>
                         </li>
                         <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/Avion/consultarAviones.php'); ?>">
-                               Consultar Aviones</a>
-                        </li>
-                        <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/Avion/buscarAviones.php'); ?>">
-                               Buscar Aviones</a>
+                                href="?pid=<?php echo base64_encode('presentacion/Avion/consultarAviones.php'); ?>">
+                                Consultar Aviones</a>
                         </li>
                     </ul>
                 </li>
@@ -86,16 +78,12 @@
                     </a>
                     <ul class="dropdown-menu shadow-sm">
                         <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/Ruta/crearRuta.php'); ?>">
-                               Crear Ruta</a>
+                                href="?pid=<?php echo base64_encode('presentacion/Ruta/crearRuta.php'); ?>">
+                                Crear Ruta</a>
                         </li>
                         <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/Ruta/consultarRutas.php'); ?>">
-                               Consultar Rutas</a>
-                        </li>
-                        <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/Ruta/buscarRuta.php'); ?>">
-                               Buscar Rutas</a>
+                                href="?pid=<?php echo base64_encode('presentacion/Ruta/consultarRutas.php'); ?>">
+                                Consultar Rutas</a>
                         </li>
                     </ul>
                 </li>
@@ -107,16 +95,12 @@
                     </a>
                     <ul class="dropdown-menu shadow-sm">
                         <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/Vuelos/crearVuelos.php'); ?>">
-                               Registrar Vuelos</a>
+                                href="?pid=<?php echo base64_encode('presentacion/Vuelos/crearVuelos.php'); ?>">
+                                Registrar Vuelos</a>
                         </li>
                         <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/Vuelos/consultarVuelos.php'); ?>">
-                               Consultar Vuelos</a>
-                        </li>
-                        <li><a class="dropdown-item"
-                               href="?pid=<?php echo base64_encode('presentacion/Vuelos/buscarProducto.php'); ?>">
-                               Buscar Vuelos</a>
+                                href="?pid=<?php echo base64_encode('presentacion/Vuelos/consultarVuelos.php'); ?>">
+                                Consultar Vuelos</a>
                         </li>
                     </ul>
                 </li>
