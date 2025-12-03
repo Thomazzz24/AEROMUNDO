@@ -244,7 +244,7 @@ $disponibilidad = $tiquete->validarDisponibilidad($idVuelo, 1);
                         </tfoot>
                     </table>
                     <div class="text-center mt-3">
-                        <a href="?pid=<?= base64_encode('presentacion/pasajero/misTiquetes.php') ?>" 
+                        <a href="?pid=<?= base64_encode('presentacion/Pasajero/misTiquetes.php') ?>" 
                            class="btn btn-primary">
                             <i class="fa-solid fa-ticket me-2"></i>
                             Ver Mis Tiquetes
