@@ -1,4 +1,6 @@
 <?php
+session_start();   // ← OBLIGATORIO PRIMERA LÍNEA
+ob_start();
 require_once("logica/Persona.php");
 require_once("logica/Admin.php");
 require_once("logica/Piloto.php");

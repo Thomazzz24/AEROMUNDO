@@ -1,6 +1,10 @@
 <?php
-
+session_start();
 ob_start();
+
+echo "<pre>";
+var_dump($_SESSION);    // Para verificar
+echo "</pre>";
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -57,7 +61,7 @@ if (empty($nombrePasajero)) {
 //     GENERAR CÓDIGO QR
 // ===========================
 //
-$contenidoQR = "https://p1.itiud.org/presentacion/Pasajero/generarPasabordo.php?id=" . $id_tiquete;
+$contenidoQR = "http://p1.itiud.org/presentacion/Pasajero/generarPasabordo.php?id=" . $id_tiquete;
 $rutaQR = "imagenes/qr_tiquete_" . $id_tiquete . ".png";
 
 // Crear carpeta si no existe
