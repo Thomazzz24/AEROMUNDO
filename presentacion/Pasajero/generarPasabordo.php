@@ -9,11 +9,13 @@ if (session_status() === PHP_SESSION_NONE) {
 if (!isset($_SESSION["id"]) || $_SESSION["rol"] != "pasajero") {
     die("Acceso no autorizado");
 }
+
 chdir(__DIR__ . '/../../');
 
 require_once('logica/tiquete.php');
 require_once('logica/Vuelo.php');
 require_once('fpdf/fpdf.php');
+require_once('phpqrcode/qrlib.php');  // ← QR
 
 // Validar id
 if (!isset($_GET["id_tiquete"]) || !is_numeric($_GET["id_tiquete"])) {
@@ -50,18 +52,40 @@ if (empty($nombrePasajero)) {
     die("Nombre de pasajero no disponible en el tiquete.");
 }
 
-// Limpiar el buffer antes de crear el PDF
+//
+// ===========================
+//     GENERAR CÓDIGO QR
+// ===========================
+//
+$contenidoQR = "https://p1.itiud.org/presentacion/Pasajero/validarPasabordo.php?id=" . $id_tiquete;
+$rutaQR = "imagenes/qr_tiquete_" . $id_tiquete . ".png";
+
+// Crear carpeta si no existe
+if (!file_exists("imagenes")) {
+    mkdir("imagenes", 0777, true);
+}
+
+QRcode::png($contenidoQR, $rutaQR, QR_ECLEVEL_L, 4);
+
+// Limpiar buffer
 ob_end_clean();
 
-// Crear PDF con diseño de pasabordo
+
+//
+// ===========================
+//        CREAR PDF
+// ===========================
+//
 $pdf = new FPDF("P", "mm", "Letter");
 $pdf->AddPage();
 $pdf->SetMargins(15, 15, 15);
 
-// ====================
-// ENCABEZADO
-// ====================
-$pdf->SetFillColor(200, 0, 0); 
+//
+// ===========================
+//        ENCABEZADO
+// ===========================
+//
+$pdf->SetFillColor(200, 0, 0);
 $pdf->Rect(0, 0, 220, 35, 'F');
 
 $pdf->SetTextColor(255, 255, 255);
@@ -71,14 +95,18 @@ $pdf->Cell(0, 10, "BOARDING PASS", 0, 1, "C");
 $pdf->SetFont("Arial", "", 10);
 $pdf->Cell(0, 5, "PASABORDO DE VUELO", 0, 1, "C");
 
+// INSERTAR QR EN LA ESQUINA SUPERIOR DERECHA
+$pdf->Image($rutaQR, 165, 5, 35);
+
 $pdf->SetTextColor(0, 0, 0);
 $pdf->Ln(10);
 
-// ====================
-// INFORMACIÓN PRINCIPAL
-// ====================
 
-// Nombre del pasajero - Grande y destacado
+//
+// ===========================
+//   INFORMACIÓN PRINCIPAL
+// ===========================
+//
 $pdf->SetFont("Arial", "B", 16);
 $pdf->Cell(0, 8, utf8_decode(strtoupper($nombrePasajero)), 0, 1);
 $pdf->SetFont("Arial", "", 9);
@@ -90,12 +118,15 @@ $pdf->SetDrawColor(200, 200, 200);
 $pdf->Line(15, $pdf->GetY(), 195, $pdf->GetY());
 $pdf->Ln(5);
 
-// ====================
-// SECCIÓN DE VUELO (3 columnas)
-// ====================
+
+//
+// ===========================
+//    SECCIÓN DE VUELO
+// ===========================
+//
 $y_vuelo = $pdf->GetY();
 
-// Columna 1: Origen
+// ORIGEN
 $pdf->SetXY(15, $y_vuelo);
 $pdf->SetFont("Arial", "B", 20);
 $codigoOrigen = strtoupper(substr($vuelo->getOrigen(), 0, 3));
@@ -107,12 +138,12 @@ $pdf->SetX(15);
 $pdf->SetFont("Arial", "", 10);
 $pdf->MultiCell(60, 4, utf8_decode($vuelo->getOrigen()), 0, "L");
 
-// Columna 2: Flecha/Avión
+// Flecha
 $pdf->SetXY(75, $y_vuelo + 5);
 $pdf->SetFont("Arial", "B", 16);
 $pdf->Cell(30, 10, ">>", 0, 0, "C");
 
-// Columna 3: Destino
+// DESTINO
 $pdf->SetXY(105, $y_vuelo);
 $pdf->SetFont("Arial", "B", 20);
 $codigoDestino = strtoupper(substr($vuelo->getDestino(), 0, 3));
@@ -130,12 +161,15 @@ $pdf->Ln(8);
 $pdf->Line(15, $pdf->GetY(), 195, $pdf->GetY());
 $pdf->Ln(5);
 
-// ====================
-// DETALLES DEL VUELO (2 columnas)
-// ====================
+
+//
+// ===========================
+// DETALLES DEL VUELO
+// ===========================
+//
 $y_detalles = $pdf->GetY();
 
-// COLUMNA IZQUIERDA
+// IZQUIERDA
 $pdf->SetXY(15, $y_detalles);
 
 // Vuelo
@@ -161,7 +195,7 @@ $pdf->SetX(15);
 $pdf->SetFont("Arial", "B", 12);
 $pdf->Cell(90, 7, date("H:i", strtotime($vuelo->getFecha_salida())), 0, 1);
 
-// COLUMNA DERECHA
+// DERECHA
 $pdf->SetXY(105, $y_detalles);
 
 // Asiento
@@ -183,9 +217,12 @@ $pdf->Cell(90, 7, $documentoPasajero, 0, 1);
 
 $pdf->Ln(5);
 
-// ====================
-// PIE DE PÁGINA
-// ====================
+
+//
+// ===========================
+//        PIE DE PÁGINA
+// ===========================
+//
 $pdf->SetY(-40);
 $pdf->Line(15, $pdf->GetY(), 195, $pdf->GetY());
 $pdf->Ln(3);
@@ -200,7 +237,9 @@ $pdf->SetFont("Arial", "", 7);
 $pdf->Cell(0, 4, "Tiquete ID: " . $id_tiquete, 0, 1, "C");
 $pdf->Cell(0, 4, "Generated: " . date("Y-m-d H:i:s"), 0, 1, "C");
 
-// Descargar el PDF
+
+// Descargar PDF
 $pdf->Output("I", "Pasabordo_" . $id_tiquete . ".pdf");
 exit();
+
 ?>
