@@ -229,5 +229,64 @@ class Vuelo {
     $conexion->cerrar();
     return $lista;
 }
+// Agregar este método en la clase Vuelo
+
+public function consultarPorPiloto($id_piloto) {
+    $conexion = new Conexion();
+    $conexion->abrir();
+    $vuelodao = new VueloDAO();
+    $conexion->ejecutar($vuelodao->consultarPorPiloto($id_piloto));
+
+    $resultados = [];
+    while ($tupla = $conexion->registro()) {
+        $vuelo = new Vuelo($tupla["id_vuelo"]);
+        $vuelo->id_ruta = $tupla["id_ruta"];
+        $vuelo->id_avion = $tupla["id_avion"];
+        $vuelo->id_piloto_principal = $tupla["id_piloto_principal"];
+        $vuelo->id_copiloto = $tupla["id_copiloto"];
+        $vuelo->fecha_salida = $tupla["fecha_salida"];
+        $vuelo->fecha_llegada = $tupla["fecha_llegada"];
+        $vuelo->estado = $tupla["estado"];
+        $vuelo->precio = isset($tupla["precio"]) ? $tupla["precio"] : 0;
+        $vuelo->origen = $tupla["origen"];
+        $vuelo->destino = $tupla["destino"];
+        $vuelo->modelo = $tupla["modelo"];
+        $vuelo->piloto_principal = $tupla["piloto_principal"];
+        $vuelo->copiloto = $tupla["copiloto"];
+        array_push($resultados, $vuelo);
+    }
+
+    $conexion->cerrar();
+    return $resultados;
+}
+// Agregar este método en la clase Vuelo
+public function consultarHistorialPorPiloto($id_piloto) {
+    $conexion = new Conexion();
+    $conexion->abrir();
+    $vuelodao = new VueloDAO();
+    $conexion->ejecutar($vuelodao->consultarHistorialPorPiloto($id_piloto));
+
+    $resultados = [];
+    while ($tupla = $conexion->registro()) {
+        $vuelo = new Vuelo($tupla["id_vuelo"]);
+        $vuelo->id_ruta = $tupla["id_ruta"];
+        $vuelo->id_avion = $tupla["id_avion"];
+        $vuelo->id_piloto_principal = $tupla["id_piloto_principal"];
+        $vuelo->id_copiloto = $tupla["id_copiloto"];
+        $vuelo->fecha_salida = $tupla["fecha_salida"];
+        $vuelo->fecha_llegada = $tupla["fecha_llegada"];
+        $vuelo->estado = $tupla["estado"];
+        $vuelo->precio = isset($tupla["precio"]) ? $tupla["precio"] : 0;
+        $vuelo->origen = $tupla["origen"];
+        $vuelo->destino = $tupla["destino"];
+        $vuelo->modelo = $tupla["modelo"];
+        $vuelo->piloto_principal = $tupla["piloto_principal"];
+        $vuelo->copiloto = $tupla["copiloto"];
+        array_push($resultados, $vuelo);
+    }
+
+    $conexion->cerrar();
+    return $resultados;
+}
 
 }

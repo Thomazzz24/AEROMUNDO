@@ -24,7 +24,6 @@ require_once(__DIR__ . "/../persistencia/rutaDAO.php");
         public function setDestino($destino) { $this->destino = $destino; }
         public function setDuracion($duracion) { $this->duracion = $duracion; }
 
-        // ============= CRUD ============= //
 
         public function registrar() {
             $conexion = new Conexion();
@@ -64,7 +63,6 @@ require_once(__DIR__ . "/../persistencia/rutaDAO.php");
 
             $resultados = [];
             while ($tupla = $conexion->registro()) {
-                // Convertir TIME a minutos
                 $duracion_time = $tupla["duracion_estimada"];
                 list($horas, $minutos, $segundos) = explode(':', $duracion_time);
                 $duracion_minutos = ($horas * 60) + $minutos;

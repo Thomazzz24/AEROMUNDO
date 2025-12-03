@@ -63,6 +63,7 @@ class Piloto extends Persona{
         }
         return false;
     }
+
     public function consultarTodos(){
     $conexion = new Conexion();
     $conexion->abrir();
@@ -123,5 +124,19 @@ class Piloto extends Persona{
         $conexion->cerrar();
         return $resultados;
     }
+    // Agregar este método en la clase Piloto
+public function obtenerIdPiloto() {
+    $conexion = new Conexion();
+    $conexion->abrir();
+    $pilotoDAO = new PilotoDAO($this->id, "", "", "", "", "", "", "", "");
+    $conexion->ejecutar($pilotoDAO->obtenerIdPiloto());
+    $tupla = $conexion->registro();
+    $conexion->cerrar();
+    
+    if($tupla != null) {
+        return $tupla["id_piloto"];
+    }
+    return null;
+}
 
 }

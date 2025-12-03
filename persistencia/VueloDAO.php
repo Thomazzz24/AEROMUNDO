@@ -229,6 +229,40 @@ class VueloDAO {
             ORDER BY v.fecha_salida ASC
         ";
     }
-
-
+ // Agregar este método en la clase VueloDAO
+public function consultarPorPiloto($id_piloto) {
+    return "SELECT v.*, 
+            r.origen, r.destino, 
+            a.modelo,
+            CONCAT(u1.nombre, ' ', u1.apellido) as piloto_principal,
+            CONCAT(u2.nombre, ' ', u2.apellido) as copiloto
+            FROM p1_vuelo v
+            INNER JOIN p1_ruta r ON v.id_ruta = r.id_ruta
+            INNER JOIN p1_avion a ON v.id_avion = a.id_avion
+            LEFT JOIN p1_piloto pi1 ON v.id_piloto_principal = pi1.id_piloto
+            LEFT JOIN p1_usuario u1 ON pi1.id_usuario = u1.id_usuario
+            LEFT JOIN p1_piloto pi2 ON v.id_copiloto = pi2.id_piloto
+            LEFT JOIN p1_usuario u2 ON pi2.id_usuario = u2.id_usuario
+            WHERE (v.id_piloto_principal = $id_piloto OR v.id_copiloto = $id_piloto)
+            AND v.fecha_salida >= NOW()
+            ORDER BY v.fecha_salida ASC";
+}
+// Agregar este método en la clase VueloDAO
+public function consultarHistorialPorPiloto($id_piloto) {
+    return "SELECT v.*, 
+            r.origen, r.destino, 
+            a.modelo,
+            CONCAT(u1.nombre, ' ', u1.apellido) as piloto_principal,
+            CONCAT(u2.nombre, ' ', u2.apellido) as copiloto
+            FROM p1_vuelo v
+            INNER JOIN p1_ruta r ON v.id_ruta = r.id_ruta
+            INNER JOIN p1_avion a ON v.id_avion = a.id_avion
+            LEFT JOIN p1_piloto pi1 ON v.id_piloto_principal = pi1.id_piloto
+            LEFT JOIN p1_usuario u1 ON pi1.id_usuario = u1.id_usuario
+            LEFT JOIN p1_piloto pi2 ON v.id_copiloto = pi2.id_piloto
+            LEFT JOIN p1_usuario u2 ON pi2.id_usuario = u2.id_usuario
+            WHERE (v.id_piloto_principal = $id_piloto OR v.id_copiloto = $id_piloto)
+            AND v.fecha_llegada < NOW()
+            ORDER BY v.fecha_salida DESC";
+}
 }

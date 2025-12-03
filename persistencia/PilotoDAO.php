@@ -99,6 +99,10 @@ class PilotoDAO{
                 ORDER BY cantidad DESC
                 LIMIT 10";
     }
+    // Agregar este método en la clase PilotoDAO
+public function obtenerIdPiloto() {
+    return "SELECT id_piloto FROM p1_piloto WHERE id_usuario = " . $this->id;
+}
 
     
 }

@@ -38,7 +38,7 @@ class Pasajero extends Persona
         $conexion->ejecutar($pasajeroDAO->registrarPasajero($idUsuario));
         $conexion->cerrar();
     }
-  public function activar($correo)
+    public function activar($correo)
 {
     $conexion = new Conexion();
     $conexion->abrir();

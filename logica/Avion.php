@@ -24,8 +24,6 @@ class Avion {
     public function setCapacidad($capacidad) { $this->capacidad = $capacidad; }
     public function setEstado($estado) { $this->estado = $estado; }
 
-    // ============= CRUD ============= //
-
     public function registrar() {
         $conexion = new Conexion();
         $conexion->abrir();

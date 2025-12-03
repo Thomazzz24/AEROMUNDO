@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once("logica/Vuelo.php");
 
 $v = new Vuelo();
