@@ -6,20 +6,16 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once("logica/Vuelo.php");
 require_once("logica/Piloto.php");
 
-// Validación de sesión
 if (!isset($_SESSION["id"]) || $_SESSION["rol"] != "piloto") {
     header("Location: ?pid=" . base64_encode("presentacion/autenticacion/autenticar.php"));
     exit();
 }
 
-// Consultar datos del piloto
 $piloto = new Piloto($_SESSION["id"]);
 $piloto->consultarPorId();
 
-// Obtener el id_piloto de la tabla p1_piloto
 $id_piloto = $piloto->obtenerIdPiloto();
 
-// Consultar los vuelos del piloto
 $vuelo = new Vuelo();
 $vuelos = $vuelo->consultarPorPiloto($id_piloto);
 ?>
@@ -62,12 +58,10 @@ $vuelos = $vuelo->consultarPorPiloto($id_piloto);
                             <?php
                             $i = 1;
                             foreach ($vuelos as $v):
-                                // Determinar si es piloto principal o copiloto
                                 $rol = ($v->getId_piloto_principal() == $id_piloto) 
                                     ? "Piloto Principal" 
                                     : "Copiloto";
-                                
-                                // Estado visual
+
                                 $badge_estado = '';
                                 switch($v->getEstado()) {
                                     case 1:

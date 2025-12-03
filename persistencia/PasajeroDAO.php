@@ -26,8 +26,6 @@ class PasajeroDAO{
                 WHERE correo = '" . $correo . "'";
     }
 
-
-    // REGISTRAR USUARIO
     public function registrarUsuario(){
         return "
             INSERT INTO p1_usuario (nombre, apellido, correo, clave, id_rol, estado)
@@ -42,7 +40,6 @@ class PasajeroDAO{
         ";
     }
 
-    // REGISTRAR PASAJERO
     public function registrarPasajero($idUsuario){
         return "
             INSERT INTO p1_pasajero (id_usuario)
@@ -50,7 +47,6 @@ class PasajeroDAO{
         ";
     }
 
-    // AUTENTICAR → AHORA TRAE TAMBIÉN id_pasajero
     public function autenticar(){
         return "
             SELECT 
@@ -65,9 +61,9 @@ class PasajeroDAO{
             FROM p1_usuario u
             INNER JOIN p1_pasajero p ON p.id_usuario = u.id_usuario
             WHERE u.correo = '{$this->correo}'
-              AND u.clave = md5('{$this->clave}')
-              AND u.id_rol = 3
-              AND u.estado = 1
+                AND u.clave = md5('{$this->clave}')
+                AND u.id_rol = 3
+                AND u.estado = 1
         ";
     }
 
@@ -106,13 +102,13 @@ class PasajeroDAO{
 
     public function consultarTodos(){
     return "SELECT u.id_usuario AS id,
-                   u.nombre,
-                   u.apellido,
-                   u.correo,
-                   u.id_rol AS rol,
-                   u.estado,
-                   u.fecha_registro AS fecharegistro,
-                   p.id_pasajero
+                    u.nombre,
+                    u.apellido,
+                    u.correo,
+                    u.id_rol AS rol,
+                    u.estado,
+                    u.fecha_registro AS fecharegistro,
+                    p.id_pasajero
             FROM p1_usuario u
             INNER JOIN p1_pasajero p ON p.id_usuario = u.id_usuario
             WHERE u.id_rol = 3"; 

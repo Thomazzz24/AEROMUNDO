@@ -45,7 +45,6 @@ require_once(__DIR__ . "/../persistencia/rutaDAO.php");
                 $this->origen = $tupla["origen"];
                 $this->destino = $tupla["destino"];
                 
-                // Convertir TIME a minutos
                 $duracion_time = $tupla["duracion_estimada"];
                 list($horas, $minutos, $segundos) = explode(':', $duracion_time);
                 $this->duracion = ($horas * 60) + $minutos;

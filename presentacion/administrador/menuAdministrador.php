@@ -1,10 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm py-3">
     <div class="container-fluid">
 
-        <!-- Logo -->
         <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
             <img src="img/logo.jpg" alt="Logo" width="45" height="45" 
-                 class="me-2 rounded-circle border border-light shadow-sm">
+                class="me-2 rounded-circle border border-light shadow-sm">
             <span class="fs-4">AEROMUNDO</span>
         </a>
 
@@ -15,7 +14,6 @@
         <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                <!-- INICIO -->
                 <li class="nav-item">
                     <a class="nav-link active"
                         href="?pid=<?php echo base64_encode('presentacion/inicio.php'); ?>">
@@ -23,8 +21,6 @@
                     </a>
                 </li>
 
-        
-                <!-- PILOTOS -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                         <i class="fa-solid fa-user-tie me-1"></i> Pilotos
@@ -41,7 +37,6 @@
                     </ul>
                 </li>
 
-                <!-- CLIENTES -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                         <i class="fa-solid fa-users me-1"></i> Clientes
@@ -54,7 +49,6 @@
                     </ul>
                 </li>
 
-                <!-- AVIONES -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                         <i class="fa-solid fa-plane me-1"></i> Aviones
@@ -71,7 +65,6 @@
                     </ul>
                 </li>
 
-                <!-- RUTAS -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                         <i class="fa-solid fa-route me-1"></i> Rutas
@@ -88,7 +81,6 @@
                     </ul>
                 </li>
 
-                <!-- VUELOS -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                         <i class="fa-solid fa-plane-departure me-1"></i> Vuelos
@@ -105,7 +97,6 @@
                     </ul>
                 </li>
 
-                <!-- ESTADISTICAS -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                         <i class="fa-solid fa-chart-line me-1"></i> Estadísticas
@@ -131,10 +122,8 @@
                         </li>
                     </ul>
                 </li>
-
             </ul>
 
-            <!-- USUARIO -->
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-bs-toggle="dropdown">

@@ -56,28 +56,24 @@ if(isset($_GET["eliminar"])){
                 <td>
                     <div class="d-flex justify-content-center gap-2">
 
-                        <!-- Activar -->
                         <div id="habilitar<?= $a->getId() ?>" <?= $a->getEstado() == 1 ? "style='display:none'" : "" ?>>
                             <a href="#" title="Habilitar">
                                 <i class="fa-regular fa-circle-check text-success fs-3"></i>
                             </a>
                         </div>
 
-                        <!-- Desactivar -->
                         <div id="deshabilitar<?= $a->getId() ?>" <?= $a->getEstado() == 1 ? "" : "style='display:none'" ?>>
                             <a href="#" title="Deshabilitar">
                                 <i class="fa-regular fa-circle-xmark text-danger fs-3"></i>
                             </a>
                         </div>
 
-                        <!-- Editar -->
                         <a href='?pid=<?= base64_encode("presentacion/Avion/editarAvion.php") ?>&idAvion=<?= $a->getId() ?>' title='Editar'>
                             <i class='fa-solid fa-pen-to-square text-primary fs-4'></i>
                         </a>
 
-                        <!-- Eliminar -->
                         <a href='?pid=<?= base64_encode("presentacion/Avion/consultarAviones.php") ?>&eliminar=<?= $a->getId() ?>' 
-                           title='Eliminar' onclick='return confirm("¿Seguro que deseas eliminar este avión?")'>
+                            title='Eliminar' onclick='return confirm("¿Seguro que deseas eliminar este avión?")'>
                             <i class='fa-solid fa-trash text-danger fs-4'></i>
                         </a>
                     </div>

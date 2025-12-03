@@ -14,10 +14,9 @@ include_once("presentacion/Pasajero/menuPasajero.php");
 <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm py-3">
     <div class="container-fluid">
 
-        <!-- Logo -->
         <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
             <img src="img/logo.jpg" alt="Logo" width="45" height="45" 
-                 class="me-2 rounded-circle border border-light shadow-sm">
+                class="me-2 rounded-circle border border-light shadow-sm">
             <span class="fs-4">AEROMUNDO</span>
         </a>
 
@@ -28,7 +27,6 @@ include_once("presentacion/Pasajero/menuPasajero.php");
         <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                <!-- INICIO -->
                 <li class="nav-item">
                     <a class="nav-link active"
                         href="?pid=<?php echo base64_encode('presentacion/inicio.php'); ?>">
@@ -36,7 +34,6 @@ include_once("presentacion/Pasajero/menuPasajero.php");
                     </a>
                 </li>
 
-                <!-- BUSCAR VUELOS -->
                 <li class="nav-item">
                     <a class="nav-link"
                         href="?pid=<?php echo base64_encode('presentacion/Pasajero/comprarVuelo.php'); ?>">
@@ -44,7 +41,6 @@ include_once("presentacion/Pasajero/menuPasajero.php");
                     </a>
                 </li>
 
-                <!-- MIS TIQUETES -->
                 <li class="nav-item">
                     <a class="nav-link"
                         href="?pid=<?php echo base64_encode('presentacion/Pasajero/misTiquetes.php'); ?>">
@@ -54,7 +50,6 @@ include_once("presentacion/Pasajero/menuPasajero.php");
 
             </ul>
 
-            <!-- USUARIO -->
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-bs-toggle="dropdown">

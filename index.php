@@ -48,7 +48,7 @@ if (!isset($_GET["pid"])) {
         } else {
             echo "<div class='alert alert-danger text-center'>
                     Error: No se encontró el archivo <b>$ruta</b>.
-                  </div>";
+                </div>";
         }
 
     } else {
@@ -58,7 +58,7 @@ if (!isset($_GET["pid"])) {
         } else {
             echo "<div class='alert alert-danger text-center'>
                     Error: No se encontró el archivo <b>$ruta</b>.
-                  </div>";
+                </div>";
         }
 
     }

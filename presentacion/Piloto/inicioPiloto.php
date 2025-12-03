@@ -1,4 +1,3 @@
-<!-- presentacion/Piloto/inicioPiloto.php -->
 <div class="row">
     <div class="col-12">
         <div class="card shadow-sm">
@@ -11,7 +10,6 @@
                 <hr>
                 
                 <div class="row g-4 mt-3">
-                    <!-- Mis Vuelos -->
                     <div class="col-md-4">
                         <div class="card border-primary">
                             <div class="card-body text-center">
@@ -19,14 +17,13 @@
                                 <h5 class="card-title">Mis Vuelos</h5>
                                 <p class="card-text">Consulta tus vuelos programados</p>
                                 <a href="?pid=<?php echo base64_encode('presentacion/Piloto/misVuelos.php'); ?>" 
-                                   class="btn btn-primary">
+                                    class="btn btn-primary">
                                     Ver Vuelos
                                 </a>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Historial -->
+
                     <div class="col-md-4">
                         <div class="card border-info">
                             <div class="card-body text-center">
@@ -34,7 +31,7 @@
                                 <h5 class="card-title">Historial</h5>
                                 <p class="card-text">Revisa tus vuelos anteriores</p>
                                 <a href="?pid=<?php echo base64_encode('presentacion/Piloto/historialVuelos.php'); ?>" 
-                                   class="btn btn-info">
+                                    class="btn btn-info">
                                     Ver Historial
                                 </a>
                             </div>

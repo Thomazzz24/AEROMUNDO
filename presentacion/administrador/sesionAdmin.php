@@ -14,7 +14,6 @@ include 'presentacion/administrador/menuAdministrador.php';
 
     <div class="row g-4">
 
-        <!-- Tarjeta 1 -->
         <div class="col-md-3">
             <div class="card shadow-sm border-0 text-center">
                 <div class="card-body">
@@ -26,7 +25,6 @@ include 'presentacion/administrador/menuAdministrador.php';
             </div>
         </div>
 
-        <!-- Tarjeta 2 -->
         <div class="col-md-3">
             <div class="card shadow-sm border-0 text-center">
                 <div class="card-body">
@@ -38,7 +36,6 @@ include 'presentacion/administrador/menuAdministrador.php';
             </div>
         </div>
 
-        <!-- Tarjeta 3 -->
         <div class="col-md-3">
             <div class="card shadow-sm border-0 text-center">
                 <div class="card-body">
@@ -50,7 +47,6 @@ include 'presentacion/administrador/menuAdministrador.php';
             </div>
         </div>
 
-        <!-- Tarjeta 4 -->
         <div class="col-md-3">
             <div class="card shadow-sm border-0 text-center">
                 <div class="card-body">

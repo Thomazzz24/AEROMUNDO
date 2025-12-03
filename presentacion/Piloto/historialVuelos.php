@@ -6,20 +6,16 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once("logica/Vuelo.php");
 require_once("logica/Piloto.php");
 
-// Validación de sesión
 if (!isset($_SESSION["id"]) || $_SESSION["rol"] != "piloto") {
     header("Location: ?pid=" . base64_encode("presentacion/autenticacion/autenticar.php"));
     exit();
 }
 
-// Consultar datos del piloto
 $piloto = new Piloto($_SESSION["id"]);
 $piloto->consultarPorId();
 
-// Obtener el id_piloto de la tabla p1_piloto
 $id_piloto = $piloto->obtenerIdPiloto();
 
-// Consultar el historial de vuelos del piloto
 $vuelo = new Vuelo();
 $historial = $vuelo->consultarHistorialPorPiloto($id_piloto);
 ?>
@@ -65,15 +61,12 @@ $historial = $vuelo->consultarHistorialPorPiloto($id_piloto);
                             <?php
                             $i = 1;
                             foreach ($historial as $v):
-                                // Determinar si es piloto principal o copiloto
                                 $rol = ($v->getId_piloto_principal() == $id_piloto) 
                                     ? "Piloto Principal" 
                                     : "Copiloto";
-                                
-                                // Estado visual
+
                                 $badge_estado = '<span class="badge bg-success">Completado</span>';
-                                
-                                // Calcular duración
+
                                 $salida = strtotime($v->getFecha_salida());
                                 $llegada = strtotime($v->getFecha_llegada());
                                 $duracion_minutos = ($llegada - $salida) / 60;

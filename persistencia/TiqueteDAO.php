@@ -34,7 +34,6 @@ class TiqueteDAO {
     }
 
     public function insertar() {
-        // Manejar NULL para id_pasajero
         $idPasajeroSQL = ($this->id_pasajero === null || $this->id_pasajero === 0 || $this->id_pasajero === "")
             ? "NULL"
             : "'{$this->id_pasajero}'";
@@ -67,9 +66,9 @@ class TiqueteDAO {
 
     public function consultarTodos() {
         return "SELECT t.*, 
-                       v.fecha_salida, 
-                       r.origen, 
-                       r.destino
+                        v.fecha_salida, 
+                        r.origen, 
+                        r.destino
                 FROM p1_tiquete t
                 INNER JOIN p1_vuelo v ON t.id_vuelo = v.id_vuelo
                 INNER JOIN p1_ruta r ON v.id_ruta = r.id_ruta
@@ -78,11 +77,11 @@ class TiqueteDAO {
 
     public function consultarPorPasajero($id_pasajero) {
         return "SELECT t.*, 
-                       v.fecha_salida, 
-                       v.fecha_llegada,
-                       r.origen, 
-                       r.destino,
-                       a.modelo
+                        v.fecha_salida, 
+                        v.fecha_llegada,
+                        r.origen, 
+                        r.destino,
+                        a.modelo
                 FROM p1_tiquete t
                 INNER JOIN p1_vuelo v ON t.id_vuelo = v.id_vuelo
                 INNER JOIN p1_ruta r ON v.id_ruta = r.id_ruta
@@ -109,11 +108,10 @@ class TiqueteDAO {
                 WHERE id_vuelo = $id_vuelo
                 AND documento = '$documento'";
     }
-  public function hacerCheckin() {
-    return "UPDATE p1_tiquete
-            SET estado_checkin = 1
-            WHERE id_tiquete = {$this->id_tiquete}";
-}
-
+    public function hacerCheckin() {
+        return "UPDATE p1_tiquete
+                SET estado_checkin = 1
+                WHERE id_tiquete = {$this->id_tiquete}";
+    }
 
 }

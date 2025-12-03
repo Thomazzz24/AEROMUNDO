@@ -20,17 +20,14 @@ if (!$t->consultarPorId()) {
     die("Tiquete no encontrado");
 }
 
-// Datos del tiquete
 $asiento = $t->getAsiento();
 $nombre = $t->getNombre_pasajero();
 $documento = $t->getDocumento();
 $id_vuelo = $t->getId_vuelo();
 
-// Obtener el vuelo
 $v = new Vuelo($id_vuelo);
 $v->consultarPorId();
 
-// Datos del vuelo
 $origen     = $v->getOrigen();
 $destino    = $v->getDestino();
 $fecha      = $v->getFecha_salida();
@@ -58,8 +55,7 @@ $hora       = date("H:i", strtotime($v->getFecha_salida()));
 
         <div class="card-body">
 
-            <!-- PASAJERO -->
-            <h5 class="mb-3">👤 Información del pasajero</h5>
+            <h5 class="mb-3">Información del pasajero</h5>
             <ul class="list-group mb-4">
                 <li class="list-group-item"><strong>Nombre:</strong> <?= htmlspecialchars($nombre) ?></li>
                 <li class="list-group-item"><strong>Documento:</strong> <?= htmlspecialchars($documento) ?></li>
@@ -67,8 +63,7 @@ $hora       = date("H:i", strtotime($v->getFecha_salida()));
                 <li class="list-group-item"><strong>ID del Tiquete:</strong> <?= $id_tiquete ?></li>
             </ul>
 
-            <!-- VUELO -->
-            <h5 class="mb-3">✈️ Información del vuelo</h5>
+            <h5 class="mb-3">Información del vuelo</h5>
             <ul class="list-group mb-4">
                 <li class="list-group-item"><strong>Origen:</strong> <?= htmlspecialchars($origen) ?></li>
                 <li class="list-group-item"><strong>Destino:</strong> <?= htmlspecialchars($destino) ?></li>
@@ -79,14 +74,12 @@ $hora       = date("H:i", strtotime($v->getFecha_salida()));
 
             <div class="d-flex justify-content-between">
 
-                <!-- Botón ver pasabordo PDF -->
                 <a href="verPasabordo.php?id=<?= $id_tiquete ?>" class="btn btn-success btn-lg">
-                    📄 Ver pasabordo (PDF)
+                    Ver pasabordo (PDF)
                 </a>
 
-                <!-- Botón volver -->
                 <a href="../inicio.php" class="btn btn-secondary btn-lg">
-                    ⬅ Volver
+                    Volver
                 </a>
 
             </div>

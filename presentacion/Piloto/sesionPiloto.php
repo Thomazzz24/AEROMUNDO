@@ -8,7 +8,6 @@ if (isset($_SESSION["id"]) && isset($_SESSION["rol"]) && $_SESSION["rol"] == "pi
     exit();
 }
 
-// Incluir el menú
 include "menuPiloto.php";
 ?>
 
@@ -16,12 +15,9 @@ include "menuPiloto.php";
     <?php
     if (isset($_GET["pid"])) {
         $page = base64_decode($_GET["pid"]);
-        
-        // IMPORTANTE: Evitar incluir sesionPiloto.php recursivamente
         if (strpos($page, 'sesionPiloto.php') === false) {
             include($page);
         } else {
-            // Si intenta cargar sesionPiloto.php, mostrar la página de inicio
             include("inicioPiloto.php");
         }
     } else {

@@ -12,7 +12,6 @@ $admin->consultarPorId();
 
 $mensaje = "";
 
-// Validar que se haya pasado el id de la ruta
 if (!isset($_GET["idRuta"])) {
     $mensaje = "<div class='alert alert-danger mt-3 text-center' role='alert'>
                     ID de ruta no proporcionado.
@@ -23,13 +22,11 @@ if (!isset($_GET["idRuta"])) {
     $ruta->consultarPorId();
 }
 
-// Procesar el formulario
 if (isset($_POST["editarRuta"])) {
     $origen = $_POST["origen"];
     $destino = $_POST["destino"];
     $duracionMinutos = $_POST["duracion"];
 
-    // Convertir minutos a formato TIME hh:mm:ss
     $horas = floor($duracionMinutos / 60);
     $minutos = $duracionMinutos % 60;
     $duracion = sprintf('%02d:%02d:00', $horas, $minutos);
@@ -69,7 +66,6 @@ if (isset($_POST["editarRuta"])) {
                         </div>
                         <div class="mb-3">
                             <?php
-                            // Convertir TIME a minutos para mostrar en el formulario
                             list($horas, $minutos, $segundos) = explode(":", $ruta->getDuracion());
                             $duracionMinutos = $horas * 60 + $minutos;
                             ?>

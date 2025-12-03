@@ -7,7 +7,6 @@ $listaVuelos = $v->consultarProximosVuelos();
 
 <body class="bg-light">
 
-	<!-- NAVBAR -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top shadow-sm">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center fw-bold" href="#">
@@ -45,7 +44,6 @@ $listaVuelos = $v->consultarProximosVuelos();
         </div>
     </nav>
 
-    <!-- CARRUSEL -->
     <div id="carousel" class="carousel slide mt-5 pt-4" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active"></button>
@@ -78,7 +76,6 @@ $listaVuelos = $v->consultarProximosVuelos();
         </button>
     </div>
 
-    <!-- BUSCADOR -->
     <div class="card shadow-sm mb-4">
         <div class="card-body">
             <h4 class="text-danger fw-bold mb-3">Buscar vuelos</h4>
@@ -112,7 +109,6 @@ $listaVuelos = $v->consultarProximosVuelos();
         </div>
     </div>
 
-    <!-- VUELOS DISPONIBLES -->
     <div class="container my-5">
         <h2 class="text-center mb-4 text-danger fw-bold">Vuelos Disponibles</h2>
 
@@ -155,7 +151,6 @@ $listaVuelos = $v->consultarProximosVuelos();
 
                         <?php $idVuelo = $vuelo->getId_vuelo(); ?>
 
-                        <!-- SI NO ES PASAJERO O NO ESTÁ LOGUEADO -->
                         <?php if (!isset($_SESSION["id"]) || $_SESSION["rol"] != "pasajero") { ?>
 
                             <a href="?pid=<?= base64_encode('autenticacion/autenticar.php') ?>&redir=<?= $idVuelo ?>"
@@ -165,7 +160,6 @@ $listaVuelos = $v->consultarProximosVuelos();
 
                         <?php } else { ?>
 
-                            <!-- SI ESTÁ LOGUEADO COMO PASAJERO -->
                             <a href="?pid=<?= base64_encode('presentacion/Pasajero/comprarTiquete.php') ?>&idVuelo=<?= $idVuelo ?>"
                                 class="btn btn-danger w-100">
                                 <i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
@@ -181,7 +175,6 @@ $listaVuelos = $v->consultarProximosVuelos();
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer class="bg-danger text-white text-center py-4 mt-5 shadow-sm">
         <div class="container">
             <p class="mb-1 fw-semibold">© 2025 AeroMundo Viajes - Todos los derechos reservados</p>
@@ -193,9 +186,7 @@ $listaVuelos = $v->consultarProximosVuelos();
     </footer>
 
 <script>
-/* ============================
-   BUSCADOR DINÁMICO (AJAX)
-   ============================ */
+
 $(document).ready(function () {
 
     function cargarOrigenes() {

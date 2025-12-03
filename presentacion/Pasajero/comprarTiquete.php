@@ -7,7 +7,6 @@ require_once("logica/Vuelo.php");
 require_once("logica/tiquete.php");
 require_once("logica/Pasajero.php");
 
-// Validar que haya sesión activa
 if (!isset($_SESSION["id"]) || !isset($_SESSION["rol"])) {
     header('Location: ?pid=' . base64_encode("autenticacion/autenticar.php"));
     exit();
@@ -15,69 +14,59 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["rol"])) {
 
 include "presentacion/Pasajero/menuPasajero.php"; 
 
-// Obtener ID del vuelo
 $idVuelo = $_GET["idVuelo"] ?? 0;
 
 if ($idVuelo == 0) {
     echo "<div class='container mt-5'>
             <div class='alert alert-danger'>Vuelo no válido.</div>
-          </div>";
+        </div>";
     exit();
 }
 
-// Cargar datos del vuelo
 $vuelo = new Vuelo($idVuelo);
 if (!$vuelo->consultarPorId()) {
     echo "<div class='container mt-5'>
             <div class='alert alert-danger'>Vuelo no encontrado.</div>
-          </div>";
+        </div>";
     exit();
 }
 
-// Validar que el vuelo sea futuro
 if (strtotime($vuelo->getFecha_salida()) < time()) {
     echo "<div class='container mt-5'>
             <div class='alert alert-warning'>Este vuelo ya partió. No es posible comprarlo.</div>
             <a href='?pid=" . base64_encode('presentacion/pasajero/consultarVuelos.php') . "' class='btn btn-primary'>Ver otros vuelos</a>
-          </div>";
+        </div>";
     exit();
 }
 
-// Cargar datos del comprador
 $comprador = new Pasajero($_SESSION["id"]);
 $comprador->consultarPorId();
 
-// Obtener disponibilidad
 $tiquete = new Tiquete();
 $disponibilidad = $tiquete->validarDisponibilidad($idVuelo, 1);
 
-// Variables para mensajes
 $mensaje = "";
 $tipoMensaje = "";
 
-// PROCESAR COMPRA
 if (isset($_POST["comprar"])) {
     
     $nombres = $_POST["pasajeros"] ?? [];
     $documentos = $_POST["documentos"] ?? [];
-    
-    // Validar que haya datos
+
     if (empty($nombres) || empty($documentos)) {
         $mensaje = "Debe ingresar al menos un pasajero.";
         $tipoMensaje = "danger";
     } else {
         
         $cantidad = count($nombres);
-        
-        // Validar disponibilidad
+
         $disponibilidad = $tiquete->validarDisponibilidad($idVuelo, $cantidad);
         
         if (!$disponibilidad['disponible']) {
             $mensaje = "No hay suficientes asientos disponibles. Solo quedan " . $disponibilidad['disponibles'] . " asientos.";
             $tipoMensaje = "warning";
         } else {
-            
-            // Procesar cada pasajero
+
             $tiquetesGenerados = [];
             $error = false;
             
@@ -85,16 +74,14 @@ if (isset($_POST["comprar"])) {
                 
                 $nombrePasajero = trim($nombres[$i]);
                 $documentoPasajero = trim($documentos[$i]);
-                
-                // Validaciones
+
                 if (empty($nombrePasajero) || empty($documentoPasajero)) {
                     $mensaje = "Todos los campos son obligatorios.";
                     $tipoMensaje = "danger";
                     $error = true;
                     break;
                 }
-                
-                // Generar asiento automático
+
                 $asiento = $tiquete->generarAsientoDisponible($idVuelo);
                 
                 if ($asiento === null) {
@@ -103,21 +90,19 @@ if (isset($_POST["comprar"])) {
                     $error = true;
                     break;
                 }
-                
-                // Determinar si el pasajero es el comprador (para guardar id_pasajero)
+
                 $idPasajero = null;
                 $nombreCompletoComprador = trim($comprador->getNombre() . " " . $comprador->getApellido());
                 
                 if (strtolower($nombrePasajero) == strtolower($nombreCompletoComprador)) {
                     $idPasajero = $comprador->getId();
                 }
-                
-                // Crear tiquete
+
                 $nuevoTiquete = new Tiquete(
                     0,
-                    $comprador->getId(),  // id_comprador (quien compra)
+                    $comprador->getId(), 
                     $idVuelo,
-                    $idPasajero,          // id_pasajero (si es el mismo que compra, sino NULL)
+                    $idPasajero, 
                     $nombrePasajero,
                     $documentoPasajero,
                     $asiento,
@@ -149,13 +134,10 @@ if (isset($_POST["comprar"])) {
     }
 }
 
-// Actualizar disponibilidad después de comprar
 $disponibilidad = $tiquete->validarDisponibilidad($idVuelo, 1);
 ?>
 
 <div class="container mt-5">
-    
-    <!-- INFORMACIÓN DEL VUELO -->
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-danger text-white">
             <h4 class="mb-0">
@@ -200,7 +182,6 @@ $disponibilidad = $tiquete->validarDisponibilidad($idVuelo, 1);
         </div>
     </div>
 
-    <!-- MENSAJES -->
     <?php if ($mensaje != ""): ?>
         <div class="alert alert-<?= $tipoMensaje ?> alert-dismissible fade show" role="alert">
             <?= $mensaje ?>
@@ -244,8 +225,7 @@ $disponibilidad = $tiquete->validarDisponibilidad($idVuelo, 1);
                         </tfoot>
                     </table>
                     <div class="text-center mt-3">
-                        <a href="?pid=<?= base64_encode('presentacion/Pasajero/misTiquetes.php') ?>" 
-                           class="btn btn-primary">
+                        <a href="?pid=<?= base64_encode('presentacion/Pasajero/misTiquetes.php') ?>" class="btn btn-primary">
                             <i class="fa-solid fa-ticket me-2"></i>
                             Ver Mis Tiquetes
                         </a>
@@ -255,7 +235,6 @@ $disponibilidad = $tiquete->validarDisponibilidad($idVuelo, 1);
         <?php endif; ?>
     <?php endif; ?>
 
-    <!-- FORMULARIO -->
     <?php if ($disponibilidad['disponibles'] > 0): ?>
     <form method="POST" id="formCompra">
         <div class="card shadow-sm">
@@ -268,7 +247,6 @@ $disponibilidad = $tiquete->validarDisponibilidad($idVuelo, 1);
             <div class="card-body">
                 
                 <div id="contenedorPasajeros">
-                    <!-- Primer pasajero (el comprador) -->
                     <div class="pasajero-item border rounded p-3 mb-3">
                         <div class="row">
                             <div class="col-md-6 mb-2">

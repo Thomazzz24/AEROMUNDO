@@ -44,7 +44,6 @@ class Tiquete {
 
     }
 
-    // Getters
     public function getId_tiquete() { return $this->id_tiquete; }
     public function getId_comprador() { return $this->id_comprador; }
     public function getId_vuelo() { return $this->id_vuelo; }
@@ -56,8 +55,6 @@ class Tiquete {
     public function getFecha_compra() { return $this->fecha_compra; }
     public function getEstadoCheckin() { return $this->estado_checkin; }
 
-
-    // Insertar tiquete
     public function insertar() {
         $conexion = new Conexion();
         $conexion->abrir();
@@ -77,7 +74,6 @@ class Tiquete {
         return $this->id_tiquete;
     }
 
-    // Obtener asientos ocupados de un vuelo
     public function obtenerAsientosOcupados($id_vuelo) {
         $conexion = new Conexion();
         $conexion->abrir();
@@ -93,12 +89,9 @@ class Tiquete {
         return $asientos;
     }
 
-    // Validar si hay espacio disponible en el vuelo
     public function validarDisponibilidad($id_vuelo, $cantidad_pasajeros) {
         $conexion = new Conexion();
-        $conexion->abrir();
-        
-        // Obtener capacidad del avión
+        $conexion->abrir();      
         $query = "SELECT a.capacidad 
                 FROM p1_avion a
                 INNER JOIN p1_vuelo v ON v.id_avion = a.id_avion
@@ -108,7 +101,6 @@ class Tiquete {
         $resultado = $conexion->registro();
         $capacidad = $resultado ? (int)$resultado['capacidad'] : 0;
         
-        // Contar tiquetes ya vendidos
         $dao = new TiqueteDAO();
         $conexion->ejecutar($dao->contarTiquetesVuelo($id_vuelo));
         $tupla = $conexion->registro();
@@ -126,12 +118,10 @@ class Tiquete {
         ];
     }
 
-    // Generar asiento automático disponible
     public function generarAsientoDisponible($id_vuelo) {
         $asientosOcupados = $this->obtenerAsientosOcupados($id_vuelo);
         
-        // Generar asientos hasta encontrar uno libre
-        $filas = 30; // Máximo de filas
+        $filas = 30;
         $columnas = ['A', 'B', 'C', 'D', 'E', 'F'];
         
         for ($fila = 1; $fila <= $filas; $fila++) {
@@ -143,10 +133,9 @@ class Tiquete {
             }
         }
         
-        return null; // No hay asientos disponibles
+        return null;
     }
 
-    // Consultar tiquetes de un pasajero
     public function consultarPorPasajero($id_pasajero) {
         $conexion = new Conexion();
         $conexion->abrir();
@@ -173,7 +162,6 @@ class Tiquete {
         return $tiquetes;
     }
 
-    // Consultar todos los tiquetes
     public function consultarTodos() {
         $conexion = new Conexion();
         $conexion->abrir();

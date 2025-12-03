@@ -64,7 +64,6 @@ if (isset($_POST["editarAvion"])) {
                                     <a href="?pid=<?php echo base64_encode('presentacion/Avion/consultarAviones.php'); ?>" 
                                     class="btn btn-secondary mt-2">Volver</a>
                                 </div>
-
                         </form>
                     </div>
                 </div>

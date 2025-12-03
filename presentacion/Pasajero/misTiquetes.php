@@ -8,7 +8,6 @@ require_once("logica/Pasajero.php");
 require_once("logica/Vuelo.php");
 require_once("logica/Checkin.php");
 
-// Validación de sesión
 if (!isset($_SESSION["id"]) || $_SESSION["rol"] != "pasajero") {
     header("Location: ?pid=" . base64_encode("autenticacion/autenticar.php"));
     exit();
@@ -16,11 +15,9 @@ if (!isset($_SESSION["id"]) || $_SESSION["rol"] != "pasajero") {
 
 include "presentacion/Pasajero/menuPasajero.php";
 
-// Consultar datos del pasajero
 $pasajero = new Pasajero($_SESSION["id"]);
 $pasajero->consultarPorId();
 
-// Consultar los tiquetes del pasajero
 $tiquete = new Tiquete();
 $tiquetes = $tiquete->consultarPorPasajero($pasajero->getId());
 ?>
@@ -74,11 +71,9 @@ $tiquetes = $tiquete->consultarPorPasajero($pasajero->getId());
 
                             foreach ($tiquetes as $t):
 
-                                // Consultar el vuelo
                                 $vuelo = new Vuelo($t->getId_vuelo());
                                 $vuelo->consultarPorId();
 
-                                // Consultar si ya hizo check-in
                                 $checkin = new Checkin();
                                 $yaCheckin = $checkin->consultarPorTiquete($t->getId_tiquete());
                             ?>
@@ -109,10 +104,9 @@ $tiquetes = $tiquete->consultarPorPasajero($pasajero->getId());
                                     <?php endif; ?>
                                 </td>
 
-                             <td class="text-center">
+                            <td class="text-center">
 
     <?php
-    // Validación de 24 horas
     $ahora = time();
     $salida = strtotime($vuelo->getFecha_salida());
     $falta = $salida - $ahora;
@@ -120,8 +114,7 @@ $tiquetes = $tiquete->consultarPorPasajero($pasajero->getId());
     $puedeCheckin = ($falta <= 24 * 3600 && $falta > 0);
     ?>
 
-  <?php if ($yaCheckin): ?>
-    <!-- ✅ Acceso directo al archivo -->
+<?php if ($yaCheckin): ?>
     <a href="presentacion/Pasajero/generarPasabordo.php?id_tiquete=<?= $t->getId_tiquete() ?>" 
         target="_blank" 
         class="btn btn-success btn-sm">
@@ -130,10 +123,9 @@ $tiquetes = $tiquete->consultarPorPasajero($pasajero->getId());
     </a>
 
     <?php elseif ($puedeCheckin): ?>
-        
-    <!--ni -->
 
-   <a href="?pid=<?= base64_encode('presentacion/Pasajero/hacerChekin.php') ?>&id_tiquete=<?= $t->getId_tiquete() ?>"
+
+<a href="?pid=<?= base64_encode('presentacion/Pasajero/hacerChekin.php') ?>&id_tiquete=<?= $t->getId_tiquete() ?>"
     class="btn btn-primary btn-sm">
     <i class="fa-solid fa-check me-1"></i>
     Hacer Check-In

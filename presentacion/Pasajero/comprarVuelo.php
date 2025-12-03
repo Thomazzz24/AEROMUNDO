@@ -17,7 +17,6 @@ include "presentacion/Pasajero/menuPasajero.php";
 <body class="bg-light">
     <div class="container my-5">
 
-    <!-- BUSCADOR -->
     <div class="card shadow-sm mb-4">
         <div class="card-body">
             <h4 class="text-danger fw-bold mb-3">Buscar vuelos</h4>
@@ -50,7 +49,7 @@ include "presentacion/Pasajero/menuPasajero.php";
             </div>
         </div>
     </div>
-    <!-- VUELOS DISPONIBLES -->
+
     <div class="container my-5">
         <h2 class="text-center mb-4 text-danger fw-bold">Vuelos Disponibles</h2>
 
@@ -61,7 +60,6 @@ include "presentacion/Pasajero/menuPasajero.php";
             <div class="col">
                 <div class="card h-100 shadow-sm border-0">
 
-                    <!-- Imagen dinámica según destino (opcional) -->
                     <?php
                     $img = "img/default.jpg";
                     if ($vuelo->getDestino() == "Cartagena") $img = "img/cartagena2.jpg";
@@ -92,13 +90,13 @@ include "presentacion/Pasajero/menuPasajero.php";
 
                         <?php if (!isset($_SESSION["id"]) || $_SESSION["rol"] != "pasajero") { ?>
                             <a href="?pid=<?= base64_encode('autenticacion/autenticar.php') ?>&redir=<?= $idVuelo ?>"
-                               class="btn btn-danger w-100">
-                               <i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
+                                class="btn btn-danger w-100">
+                                <i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
                             </a>
                         <?php } else { ?>
                             <a href="?pid=<?= base64_encode('presentacion/Pasajero/comprarTiquete.php') ?>&idVuelo=<?= $idVuelo ?>"
-                               class="btn btn-danger w-100">
-                               <i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
+                                class="btn btn-danger w-100">
+                                <i class="fa-solid fa-plane-departure me-1"></i> Reservar vuelo
                             </a>
                         <?php } ?>
                     </div>
@@ -113,7 +111,6 @@ include "presentacion/Pasajero/menuPasajero.php";
     <script>
         $(document).ready(function () {
 
-    // Cargar orígenes al inicio
     function cargarOrigenes() {
         console.log("🔄 Cargando orígenes...");
         
@@ -122,10 +119,10 @@ include "presentacion/Pasajero/menuPasajero.php";
             method: "GET",
             dataType: "json",
             success: function (data) {
-                console.log("✅ Orígenes recibidos:", data);
+                console.log("Orígenes recibidos:", data);
                 
                 if (data.error) {
-                    console.error("❌ Error del servidor:", data.mensaje);
+                    console.error("Error del servidor:", data.mensaje);
                     alert("Error al cargar orígenes: " + data.mensaje);
                     return;
                 }
@@ -134,20 +131,19 @@ include "presentacion/Pasajero/menuPasajero.php";
                 data.forEach(function (origen) {
                     $("#origen").append(`<option value="${origen}">${origen}</option>`);
                 });
-                console.log("✅ Select de origen llenado");
+                console.log("Select de origen llenado");
             },
             error: function (xhr, status, error) {
-                console.error("❌ Error AJAX al cargar orígenes:", error);
+                console.error("Error AJAX al cargar orígenes:", error);
                 console.error("Respuesta del servidor:", xhr.responseText);
                 alert("Error de conexión al cargar orígenes. Revisa la consola.");
             }
         });
     }
 
-    // Cargar destinos (puede filtrarse por origen)
     function cargarDestinos() {
         let origenSeleccionado = $("#origen").val();
-        console.log("🔄 Cargando destinos para origen:", origenSeleccionado || "todos");
+        console.log("Cargando destinos para origen:", origenSeleccionado || "todos");
         
         $.ajax({
             url: "Ajax/obtenerDestinos.php",
@@ -155,10 +151,10 @@ include "presentacion/Pasajero/menuPasajero.php";
             data: { origen: origenSeleccionado },
             dataType: "json",
             success: function (data) {
-                console.log("✅ Destinos recibidos:", data);
+                console.log("Destinos recibidos:", data);
                 
                 if (data.error) {
-                    console.error("❌ Error del servidor:", data.mensaje);
+                    console.error("Error del servidor:", data.mensaje);
                     alert("Error al cargar destinos: " + data.mensaje);
                     return;
                 }
@@ -170,25 +166,23 @@ include "presentacion/Pasajero/menuPasajero.php";
                     let selected = (destino == destinoActual) ? 'selected' : '';
                     $("#destino").append(`<option value="${destino}" ${selected}>${destino}</option>`);
                 });
-                console.log("✅ Select de destino llenado");
+                console.log("Select de destino llenado");
             },
             error: function (xhr, status, error) {
-                console.error("❌ Error AJAX al cargar destinos:", error);
+                console.error("Error AJAX al cargar destinos:", error);
                 console.error("Respuesta del servidor:", xhr.responseText);
                 alert("Error de conexión al cargar destinos. Revisa la consola.");
             }
         });
     }
 
-    // Buscar vuelos según los filtros
     function buscarVuelos() {
         let origen = $("#origen").val();
         let destino = $("#destino").val();
         let fecha = $("#fecha").val();
 
-        console.log("🔍 Buscando vuelos con:", { origen, destino, fecha });
+        console.log(" Buscando vuelos con:", { origen, destino, fecha });
 
-        // Mostrar indicador de carga
         $("#contenedorVuelos").html(`
             <div class="col-12 text-center py-5">
                 <div class="spinner-border text-danger" role="status">
@@ -198,17 +192,16 @@ include "presentacion/Pasajero/menuPasajero.php";
             </div>
         `);
 
-        // Realizar búsqueda
         $.ajax({
             url: "Ajax/buscarVuelos.php",
             method: "GET",
             data: { origen, destino, fecha },
             success: function (html) {
-                console.log("✅ Vuelos cargados");
+                console.log("Vuelos cargados");
                 $("#contenedorVuelos").html(html);
             },
             error: function (xhr, status, error) {
-                console.error("❌ Error al buscar vuelos:", error);
+                console.error("Error al buscar vuelos:", error);
                 $("#contenedorVuelos").html(`
                     <div class="col-12">
                         <div class="alert alert-danger">
@@ -221,30 +214,28 @@ include "presentacion/Pasajero/menuPasajero.php";
         });
     }
 
-    // Eventos
     $("#origen").change(function() {
-        console.log("📍 Origen cambiado a:", $(this).val());
-        cargarDestinos(); // Recargar destinos según origen
-        buscarVuelos();   // Buscar vuelos
+        console.log("Origen cambiado a:", $(this).val());
+        cargarDestinos();
+        buscarVuelos();
     });
 
     $("#destino").change(function() {
-        console.log("📍 Destino cambiado a:", $(this).val());
+        console.log("Destino cambiado a:", $(this).val());
         buscarVuelos();
     });
 
     $("#fecha").change(function() {
-        console.log("📅 Fecha cambiada a:", $(this).val());
+        console.log("Fecha cambiada a:", $(this).val());
         buscarVuelos();
     });
     
     $("#btnBuscar").click(function() {
-        console.log("🔘 Botón buscar presionado");
+        console.log("Botón buscar presionado");
         buscarVuelos();
     });
 
-    // Inicializar
-    console.log("🚀 Inicializando buscador de vuelos...");
+    console.log("Inicializando buscador de vuelos...");
     cargarOrigenes();
     cargarDestinos();
 });

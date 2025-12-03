@@ -10,7 +10,6 @@ if ($_SESSION["rol"] != "admin") {
 $admin = new Admin($id);
 $admin->consultarPorId();
 
-// Obtener todas las rutas
 $ruta = new Ruta();
 $listaRutas = $ruta->consultarTodos();
 
@@ -60,7 +59,7 @@ if (isset($_GET["eliminar"])) {
                                 <i class='fa-solid fa-pen-to-square text-primary fs-4 me-2'></i>
                             </a>
                             <a href='?pid=<?= base64_encode("presentacion/Ruta/consultarRutas.php") ?>&eliminar=<?= $r->getId() ?>' title='Eliminar' 
-                               onclick='return confirm("¿Estás seguro de eliminar esta ruta?")'>
+                                onclick='return confirm("¿Estás seguro de eliminar esta ruta?")'>
                                 <i class='fa-solid fa-trash text-danger fs-4'></i>
                             </a>
                         </td>
