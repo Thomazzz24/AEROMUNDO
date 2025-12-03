@@ -1,14 +1,4 @@
 <?php
-
-ob_start();
-echo "<pre>";
-var_dump($_SESSION);
-echo "</pre>";
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
 if (!isset($_SESSION["id"]) || $_SESSION["rol"] != "pasajero") {
     die("Acceso no autorizado");
 }
@@ -60,7 +50,7 @@ if (empty($nombrePasajero)) {
 //     GENERAR CÓDIGO QR
 // ===========================
 //
-$contenidoQR = "https://p1.itiud.org/presentacion/Pasajero/validarPasabordo.php?id=" . $id_tiquete;
+$contenidoQR = "http://p1.itiud.org/presentacion/Pasajero/generarPasabordo.php?id=" . $id_tiquete;
 $rutaQR = "imagenes/qr_tiquete_" . $id_tiquete . ".png";
 
 // Crear carpeta si no existe
